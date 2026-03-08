@@ -1,60 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For Afrin 💔</title>
+<title>For Afrin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
 height:100vh;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+background:black;
 font-family:Arial;
+color:white;
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
+text-align:center;
 overflow:hidden;
 }
 
+/* Afrin glowing text */
+
+.name{
+font-family:'Great Vibes',cursive;
+font-size:60px;
+color:#ff4b6e;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{ text-shadow:0 0 10px #ff4b6e;}
+to{ text-shadow:0 0 30px #ff0040,0 0 40px #ff0040;}
+}
+
 .container{
-text-align:center;
-background:rgba(0,0,0,0.5);
+background:rgba(0,0,0,0.6);
 padding:40px;
 border-radius:20px;
-box-shadow:0 0 30px rgba(0,0,0,0.6);
 max-width:500px;
-}
-
-h1{
-font-size:40px;
-}
-
-p{
-font-size:18px;
-line-height:1.6;
-}
-
-.heart{
-position:absolute;
-color:red;
-animation:fall 5s linear infinite;
-}
-
-@keyframes fall{
-0%{transform:translateY(-100px)}
-100%{transform:translateY(100vh)}
-}
-
-.broken{
-font-size:60px;
-animation:break 1s infinite;
-}
-
-@keyframes break{
-0%{transform:scale(1)}
-50%{transform:scale(1.2)}
-100%{transform:scale(1)}
 }
 
 button{
@@ -69,7 +53,20 @@ margin-top:20px;
 }
 
 button:hover{
-background:#ff1e50;
+background:#ff0033;
+}
+
+/* emoji rain */
+
+.emoji{
+position:absolute;
+font-size:24px;
+animation:fall 6s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
 }
 
 </style>
@@ -79,53 +76,81 @@ background:#ff1e50;
 
 <div class="container">
 
-<h1>Afrin</h1>
-
-<div class="broken">💔</div>
+<div class="name">Afrin</div>
 
 <p>
-I loved you truly.  
-Maybe you never understood my feelings.
-
-I cared about you more than anyone.  
-But sometimes love hurts when it isn't valued.
-
-Still my heart says one thing...
+Sometimes love stays even when the heart hurts.
 </p>
 
-<h2>I Love You Afrin</h2>
+<button onclick="showNote()">Click for more</button>
 
-<button onclick="message()">Click if you ever cared</button>
+<p id="note" style="display:none;margin-top:15px;font-size:18px;">
+Afrin,  
+maybe I never found the perfect words to explain my feelings.
 
-<p id="msg" style="display:none;margin-top:15px;">
-Even if my heart breaks,  
-my love for you will always remain.
+But the truth is simple —  
+I cared about you deeply and sincerely.
+
+Even if life changes things,  
+a part of my heart will always wish you happiness.
+
+You were never just someone in my life…  
+you were someone special.
+</p>
+
+<p id="whatsapp" style="display:none;margin-top:20px;font-size:20px;">
+If you love me, text me on WhatsApp ❤️
 </p>
 
 </div>
 
+<!-- music (paste youtube embed of the song here if you want) -->
+<!-- example -->
+<!--
+<iframe width="0" height="0"
+src="PASTE_YOUTUBE_EMBED_LINK_HERE"
+frameborder="0" allow="autoplay"></iframe>
+-->
+
 <script>
 
-function message(){
-document.getElementById("msg").style.display="block";
+/* emoji rain */
+
+function createEmoji(){
+
+let e=document.createElement("div");
+
+let emojis=["❤️","💓","💔","😭","💞"];
+
+e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+
+e.className="emoji";
+
+e.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(e);
+
+setTimeout(()=>{e.remove()},6000);
+
 }
 
-function hearts(){
+setInterval(createEmoji,200);
 
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤";
+/* button action */
 
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(Math.random()*20+10)+"px";
+function showNote(){
 
-document.body.appendChild(heart);
+document.getElementById("note").style.display="block";
 
-setTimeout(()=>{heart.remove()},5000);
+setTimeout(function(){
+
+document.getElementById("note").style.display="none";
+
+document.getElementById("whatsapp").style.display="block";
+
+},10000);
 
 }
-
-setInterval(hearts,300);
 
 </script>
 
