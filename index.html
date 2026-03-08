@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Afrin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+background:#0b0b0b;
+color:white;
+font-family:Arial;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+}
+
+/* container */
+
+.container{
+background:rgba(0,0,0,0.65);
+padding:40px;
+border-radius:20px;
+max-width:520px;
+backdrop-filter:blur(6px);
+}
+
+/* glowing name */
+
+.name{
+font-family:'Great Vibes',cursive;
+font-size:70px;
+color:#ff4b6e;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px #ff4b6e;}
+to{text-shadow:0 0 40px #ff0040,0 0 60px #ff0040;}
+}
+
+/* buttons */
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#ff4b6e;
+color:white;
+font-size:16px;
+cursor:pointer;
+margin-top:15px;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+background:#ff0033;
+}
+
+/* WhatsApp */
+
+.whatsapp{
+background:#25D366;
+}
+
+/* rain */
+
+.rain{
+position:absolute;
+width:2px;
+height:100px;
+background:rgba(255,255,255,0.2);
+animation:rainfall 1s linear infinite;
+}
+
+@keyframes rainfall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
+}
+
+/* hearts */
+
+.emoji{
+position:absolute;
+font-size:22px;
+animation:fall 6s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(100vh);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="name">Afrin</div>
+
+<p>Even if my heart breaks… I still love you.</p>
+
+<button onclick="showNote()">Click for more</button>
+
+<p id="note" style="display:none;margin-top:15px;font-size:18px;">
+Afrin…  
+maybe I was never perfect.
+
+But my love for you was always real.
+
+Even if we are not together,  
+my heart will still pray for your happiness.
+
+Because loving you was never a mistake.
+</p>
+
+<div id="afterNote" style="display:none;">
+
+<p style="font-size:20px;">If you love me text me in WhatsApp ❤️</p>
+
+<button onclick="playSong()">▶ Play Our Song</button>
+
+<div id="song" style="display:none;margin-top:10px;">
+<iframe width="300" height="170"
+src="https://www.youtube.com/embed/8a4Gx9U2GJk?autoplay=1"
+frameborder="0"
+allow="autoplay"
+allowfullscreen>
+</iframe>
+</div>
+
+<br>
+
+<a href="https://wa.me/91YOURNUMBER?text=I%20love%20you" target="_blank">
+<button class="whatsapp">Text me on WhatsApp</button>
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+/* rain effect */
+
+function createRain(){
+
+let drop=document.createElement("div");
+
+drop.className="rain";
+
+drop.style.left=Math.random()*100+"vw";
+
+drop.style.animationDuration=(Math.random()*1+0.5)+"s";
+
+document.body.appendChild(drop);
+
+setTimeout(()=>{drop.remove()},1000);
+
+}
+
+setInterval(createRain,50);
+
+/* emoji rain */
+
+function createEmoji(){
+
+let e=document.createElement("div");
+
+let emojis=["❤️","💓","💔","😭"];
+
+e.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];
+
+e.className="emoji";
+
+e.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(e);
+
+setTimeout(()=>{e.remove()},6000);
+
+}
+
+setInterval(createEmoji,300);
+
+/* note */
+
+function showNote(){
+
+document.getElementById("note").style.display="block";
+
+setTimeout(function(){
+
+document.getElementById("note").style.display="none";
+document.getElementById("afterNote").style.display="block";
+
+},10000);
+
+}
+
+/* song */
+
+function playSong(){
+
+document.getElementById("song").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
