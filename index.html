@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Iftar</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(#0f2027,#203a43,#2c5364);
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+/* credit */
+
+.credit{
+position:fixed;
+top:5px;
+width:100%;
+font-size:12px;
+opacity:0.7;
+}
+
+/* screen */
+
+.screen{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+/* crescent moon */
+
+.moon{
+width:120px;
+height:120px;
+background:white;
+border-radius:50%;
+box-shadow:0 0 30px white,0 0 60px gold;
+position:relative;
+margin-bottom:20px;
+}
+
+.moon:after{
+content:"";
+position:absolute;
+top:0;
+left:30px;
+width:120px;
+height:120px;
+background:#203a43;
+border-radius:50%;
+}
+
+/* title */
+
+.title{
+font-size:42px;
+color:gold;
+text-shadow:0 0 20px gold;
+margin-bottom:20px;
+}
+
+/* buttons */
+
+button{
+padding:12px 30px;
+font-size:18px;
+border:none;
+border-radius:25px;
+background:gold;
+cursor:pointer;
+}
+
+/* menu card */
+
+.menu{
+display:none;
+background:white;
+color:black;
+padding:25px;
+border-radius:20px;
+max-width:600px;
+margin:auto;
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+}
+
+.menu-title{
+font-size:30px;
+color:#b8860b;
+margin-bottom:15px;
+}
+
+.menu-item{
+padding:6px;
+font-size:18px;
+}
+
+/* sparkle rain */
+
+.sparkle{
+position:fixed;
+width:6px;
+height:6px;
+background:gold;
+border-radius:50%;
+top:-10px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+}
+
+.final{
+display:none;
+font-size:22px;
+margin-top:20px;
+color:#ffd700;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="credit">WEBSITE CREATED BY SUHAIL</div>
+
+<!-- SCREEN 1 -->
+
+<div class="screen" id="home">
+
+<div class="moon"></div>
+
+<div class="title">RAMADAN MUBARAK</div>
+
+<button onclick="showNotice()">NEXT</button>
+
+</div>
+
+<!-- SCREEN 2 -->
+
+<div class="screen" id="notice" style="display:none">
+
+<h2>BOOK YOUR IFTAR SLOT NOW BY PAYING RS 500</h2>
+
+<p>IF YOU FAIL TO PAY YOU WILL NOT ALLOWED TO DO THE VIP IFTAR</p>
+
+<button onclick="showMenu()">VIEW MENU</button>
+
+</div>
+
+<!-- SCREEN 3 -->
+
+<div class="screen" id="menuPage" style="display:none">
+
+<div class="menu">
+
+<div class="menu-title">IFTAR MENU</div>
+
+<div class="menu-item">CHICKEN BIRYANI WITH LEG PIECE AND EGG (FULL)</div>
+<div class="menu-item">NIHARI AS GRAVY WILL BE THERE</div>
+<div class="menu-item">PAKORA 2P</div>
+<div class="menu-item">JALEBI AS MUCH U WANT</div>
+<div class="menu-item">KHAJOR 2 PIECE</div>
+<div class="menu-item">AND FRUITS</div>
+<div class="menu-item">1 GLASS COLD DRINK</div>
+<div class="menu-item">2 CIGARETTES OF YOUR CHOICE</div>
+<div class="menu-item">1 GUTKA OF YOUR CHOICE</div>
+<div class="menu-item">AND UNLIMITED WATER</div>
+
+</div>
+
+<br>
+
+<button onclick="showFinal()">NEXT</button>
+
+<div class="final" id="finalMsg">
+SEND RS 500 QUICKLY BEFORE 12 PM IN THE MORNING
+</div>
+
+</div>
+
+<script>
+
+function showNotice(){
+document.getElementById("home").style.display="none";
+document.getElementById("notice").style.display="flex";
+}
+
+function showMenu(){
+document.getElementById("notice").style.display="none";
+document.getElementById("menuPage").style.display="flex";
+
+/* sparkle rain */
+
+for(let i=0;i<80;i++){
+
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(2+Math.random()*3)+"s";
+
+document.body.appendChild(s);
+
+}
+
+}
+
+function showFinal(){
+document.getElementById("finalMsg").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
