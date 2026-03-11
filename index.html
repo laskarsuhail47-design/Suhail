@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sneha ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(#ff9a9e,#fad0c4);
+text-align:center;
+overflow-x:hidden;
+}
+
+/* screens */
+
+.screen{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+/* title */
+
+.title{
+font-size:35px;
+color:#fff;
+margin-bottom:20px;
+text-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+/* buttons */
+
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:25px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+margin:10px;
+}
+
+/* envelope */
+
+.envelope{
+font-size:80px;
+margin-bottom:20px;
+}
+
+/* note */
+
+.note{
+background:white;
+padding:25px;
+border-radius:20px;
+max-width:600px;
+box-shadow:0 0 20px rgba(0,0,0,0.2);
+font-size:18px;
+}
+
+/* heart rain */
+
+.heart{
+position:fixed;
+top:-20px;
+font-size:20px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+
+<div class="screen" id="home">
+
+<div class="title">Hey Sneha 💖<br>I made something for you</div>
+
+<button onclick="openLetter()">Tap To Open</button>
+
+</div>
+
+<!-- SCREEN 2 -->
+
+<div class="screen" id="letter" style="display:none">
+
+<div class="envelope">💌</div>
+
+<h2>I want to tell you something...</h2>
+
+<button onclick="showQuestion()">Click to know</button>
+
+</div>
+
+<!-- SCREEN 3 -->
+
+<div class="screen" id="question" style="display:none">
+
+<h2>Do you like me? 🥺</h2>
+
+<button onclick="showLove()">YES ❤️</button>
+
+<button id="noBtn" onmouseover="moveNo()">NO 🙈</button>
+
+</div>
+
+<!-- SCREEN 4 FINAL NOTE -->
+
+<div class="screen" id="final" style="display:none">
+
+<div class="note">
+
+<p>
+Sneha, ever since we started talking, I developed a strong attachment to you.  
+I don’t know whether you like me or not, but I truly like you a lot.  
+
+I know you have faced many difficult moments and gone through very hard times in your life.  
+That is why I want to give you all the happiness that no one else could give you.  
+
+I want to accept your stubborn nature and prove to everyone that if love is real, everything is possible.  
+
+Many times you left me alone and went back to your boyfriend, but I was never angry with you.  
+I always waited for you, because I truly love you.  
+
+The only fear I still have in my heart is that you might leave me again someday.  
+But even now, I still trust you.
+
+I want to ask you something, Sneha...
+
+<b>Will you become my life partner? 🥹</b>
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function openLetter(){
+document.getElementById("home").style.display="none";
+document.getElementById("letter").style.display="flex";
+}
+
+function showQuestion(){
+document.getElementById("letter").style.display="none";
+document.getElementById("question").style.display="flex";
+}
+
+function showLove(){
+
+document.getElementById("question").style.display="none";
+document.getElementById("final").style.display="flex";
+
+/* heart rain */
+
+for(let i=0;i<80;i++){
+
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(2+Math.random()*3)+"s";
+
+document.body.appendChild(heart);
+
+}
+
+}
+
+/* NO button runs away */
+
+function moveNo(){
+
+let btn=document.getElementById("noBtn");
+
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"%";
+btn.style.top=Math.random()*80+"%";
+
+}
+
+</script>
+
+</body>
+</html>
