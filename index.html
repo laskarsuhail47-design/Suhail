@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Premium Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+<title>Eid Mubarak</title>
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+background:linear-gradient(to top,#000000,#020111,#000000);
+color:white;
+text-align:center;
+font-family:Arial;
+}
+
+/* credit */
+
+.credit{
+position:fixed;
+top:5px;
+width:100%;
+font-size:12px;
+opacity:0.7;
+}
+
+/* stars */
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+animation:move linear infinite;
+}
+
+@keyframes move{
+0%{transform:translateY(0);}
+100%{transform:translateY(100vh);}
+}
+
+/* moon */
+
+.moon{
+position:absolute;
+top:60px;
+left:50%;
+transform:translateX(-50%);
+width:120px;
+height:120px;
+background:white;
+border-radius:50%;
+box-shadow:0 0 40px white,0 0 100px gold;
+}
+
+.moon:after{
+content:"";
+position:absolute;
+top:0;
+left:40px;
+width:120px;
+height:120px;
+background:#020111;
+border-radius:50%;
+}
+
+/* Eid text */
+
+.eid{
+position:absolute;
+top:-100px;
+width:100%;
+font-size:55px;
+font-family:'Cinzel', serif;
+color:gold;
+text-shadow:0 0 20px gold,0 0 60px gold;
+animation:drop 3s forwards;
+}
+
+@keyframes drop{
+to{top:40%;}
+}
+
+/* fireworks */
+
+.firework{
+position:absolute;
+width:5px;
+height:5px;
+background:gold;
+border-radius:50%;
+opacity:0;
+animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+0%{
+transform:scale(0);
+opacity:1;
+}
+100%{
+transform:scale(20);
+opacity:0;
+}
+}
+
+/* button */
+
+button{
+display:none;
+position:absolute;
+top:65%;
+left:50%;
+transform:translateX(-50%);
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:25px;
+background:gold;
+cursor:pointer;
+}
+
+/* note */
+
+.note{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:black;
+padding:25px;
+border-radius:20px;
+max-width:320px;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="credit">WEBSITE DEVELOPER: SUHAIL</div>
+
+<div class="moon"></div>
+
+<div class="eid">EID MUBARAK ✨</div>
+
+<button id="btn" onclick="showNote()">Show Note</button>
+
+<div class="note" id="note">
+<p>
+Assalamualaikum,  
+Wishing all my friends a very happy and blessed Eid Mubarak.  
+May Allah bless you with happiness, peace and success.  
+
+✨ Eid Mubarak ✨  
+
+<br><br>
+<b>From Suhail</b>
+</p>
+</div>
+
+<script>
+
+/* stars */
+
+for(let i=0;i<120;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+s.style.animationDuration=(5+Math.random()*10)+"s";
+document.body.appendChild(s);
+}
+
+/* fireworks */
+
+setTimeout(()=>{
+for(let i=0;i<20;i++){
+
+let f1=document.createElement("div");
+f1.className="firework";
+f1.style.left="20%";
+f1.style.top="40%";
+document.body.appendChild(f1);
+
+let f2=document.createElement("div");
+f2.className="firework";
+f2.style.left="80%";
+f2.style.top="40%";
+document.body.appendChild(f2);
+
+}
+},3000);
+
+/* button after 5 sec */
+
+setTimeout(()=>{
+document.getElementById("btn").style.display="block";
+},5000);
+
+/* show note */
+
+function showNote(){
+document.getElementById("note").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
