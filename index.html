@@ -1,269 +1,529 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <title>Happy Birthday Afrin ❤️</title>
 
-<title>Eid Mubarak</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
+    body {
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #1a1025, #3b183d, #1c1026);
+      color: white;
+    }
 
-/* FORCE BLACK SKY */
-html,body{
-margin:0;
-padding:0;
-background:#000 !important;
-overflow:hidden;
-color:white;
-text-align:center;
-font-family:Arial;
-}
+    .page {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      position: relative;
+    }
 
-/* credit */
+    .page.active {
+      display: flex;
+    }
 
-.credit{
-position:fixed;
-top:5px;
-width:100%;
-font-size:12px;
-opacity:0.7;
-z-index:10;
-}
+    /* ---------- PAGE 1 ---------- */
 
-/* stars */
+    #welcomePage {
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
+    }
 
-.star{
-position:absolute;
-width:2px;
-height:2px;
-background:white;
-animation:move linear infinite;
-z-index:1;
-}
+    .birthday-title {
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: bold;
+      background: linear-gradient(90deg, #ffb6d9, #ffffff, #ff83bd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 1.5s infinite alternate, float 2s ease-in-out infinite;
+      text-shadow: 0 0 40px rgba(255, 150, 210, 0.5);
+    }
 
-@keyframes move{
-0%{transform:translateY(0);}
-100%{transform:translateY(100vh);}
-}
+    .birthday-name {
+      margin-top: 15px;
+      font-size: clamp(1.5rem, 5vw, 3rem);
+      color: #ffd2e6;
+      animation: fadeIn 2s ease;
+    }
 
-/* moon */
+    .click-here {
+      margin-top: 50px;
+      padding: 16px 45px;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #ff4f92, #b43cff);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(255, 79, 146, 0.6);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.3s;
+      animation: buttonAppear 0.8s forwards;
+      animation-delay: 3s;
+    }
 
-.moon{
-position:absolute;
-top:60px;
-left:50%;
-transform:translateX(-50%);
-width:120px;
-height:120px;
-background:white;
-border-radius:50%;
-box-shadow:0 0 40px white,0 0 100px gold;
-z-index:3;
-}
+    .click-here:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 45px rgba(255, 79, 146, 0.9);
+    }
 
-.moon:after{
-content:"";
-position:absolute;
-top:0;
-left:40px;
-width:120px;
-height:120px;
-background:black;
-border-radius:50%;
-}
+    /* ---------- PAGE 2 ---------- */
 
-/* mosque */
+    #messagePage {
+      max-width: 1100px;
+      margin: auto;
+    }
 
-.mosque{
-position:absolute;
-bottom:0;
-width:100%;
-height:180px;
-background:black;
-clip-path:polygon(
-0% 100%, 
-0% 60%, 
-10% 60%, 
-15% 40%, 
-20% 60%, 
-30% 60%, 
-35% 30%, 
-40% 60%, 
-50% 60%, 
-55% 40%, 
-60% 60%, 
-70% 60%, 
-75% 30%, 
-80% 60%, 
-90% 60%, 
-100% 60%, 
-100% 100%
-);
-box-shadow:0 -10px 40px rgba(255,215,0,0.3);
-z-index:2;
-}
+    .message-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
 
-/* text */
+    .message-box {
+      flex: 1;
+      min-width: 280px;
+      max-width: 520px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 25px;
+      padding: 35px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+      animation: slideLeft 1s ease;
+    }
 
-.eid{
-position:absolute;
-top:-100px;
-width:100%;
-font-size:55px;
-font-family:'Cinzel', serif;
-color:gold;
-text-shadow:0 0 20px gold,0 0 60px gold;
-animation:drop 3s forwards;
-z-index:4;
-}
+    .message-box h1 {
+      margin-bottom: 25px;
+      color: #ffb6d9;
+      font-size: 2.3rem;
+    }
 
-@keyframes drop{
-to{top:40%;}
-}
+    .message-box p {
+      font-size: 1.08rem;
+      line-height: 1.9;
+      color: #f5eaf2;
+    }
 
-/* firecracker particles */
+    .photo-section {
+      flex: 1;
+      min-width: 280px;
+      max-width: 400px;
+      text-align: center;
+      animation: slideRight 1s ease;
+    }
 
-.particle{
-position:absolute;
-width:4px;
-height:4px;
-background:gold;
-border-radius:50%;
-pointer-events:none;
-animation:explode 1s ease-out forwards;
-z-index:5;
-}
+    .photo-frame {
+      padding: 10px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ff6ea8, #a855f7, #ff9dc6);
+      box-shadow: 0 0 40px rgba(255, 100, 180, 0.35);
+    }
 
-@keyframes explode{
-from{
-transform:translate(0,0);
-opacity:1;
-}
-to{
-transform:translate(var(--x), var(--y));
-opacity:0;
-}
-}
+    .photo-frame img {
+      width: 100%;
+      display: block;
+      border-radius: 22px;
+      max-height: 500px;
+      object-fit: cover;
+    }
 
-/* button */
+    .click-me {
+      margin-top: 25px;
+      padding: 14px 38px;
+      border: none;
+      border-radius: 50px;
+      background: white;
+      color: #8d2b68;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-button{
-display:none;
-position:absolute;
-top:65%;
-left:50%;
-transform:translateX(-50%);
-padding:12px 25px;
-font-size:18px;
-border:none;
-border-radius:25px;
-background:gold;
-cursor:pointer;
-z-index:6;
-}
+    .click-me:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(255,255,255,0.5);
+    }
 
-/* note */
+    /* ---------- PAGE 3 ---------- */
 
-.note{
-display:none;
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:white;
-color:black;
-padding:25px;
-border-radius:20px;
-max-width:320px;
-z-index:7;
-}
+    #finalPage {
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
+    }
 
-</style>
+    .final-card {
+      max-width: 750px;
+      padding: 50px 35px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.15);
+      animation: finalAppear 1.2s ease;
+      box-shadow: 0 0 60px rgba(255, 90, 170, 0.2);
+    }
+
+    .heart {
+      font-size: 4rem;
+      animation: heartbeat 1.3s infinite;
+      margin-bottom: 20px;
+    }
+
+    .final-card h1 {
+      color: #ffb6d9;
+      margin-bottom: 30px;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .final-card p {
+      font-size: 1.2rem;
+      line-height: 2;
+      color: #f5eaf2;
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: #ffc4dd;
+      font-style: italic;
+    }
+
+    /* ---------- BACKGROUND PARTICLES ---------- */
+
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: rise linear infinite;
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    /* ---------- ANIMATIONS ---------- */
+
+    @keyframes glow {
+      from {
+        filter: drop-shadow(0 0 10px #ff8fbd);
+      }
+
+      to {
+        filter: drop-shadow(0 0 30px #ff4f9a);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes buttonAppear {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes finalAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(110vh) rotate(0deg);
+      }
+
+      to {
+        transform: translateY(-10vh) rotate(360deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .message-container {
+        gap: 30px;
+      }
+
+      .message-box {
+        padding: 28px 22px;
+      }
+
+      .final-card {
+        padding: 40px 22px;
+      }
+
+      .final-card p {
+        font-size: 1.05rem;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
 
-<div class="credit">WEBSITE DEVELOPER: SUHAIL</div>
+  <!-- PAGE 1 -->
+  <section class="page active" id="welcomePage">
 
-<div class="moon"></div>
-<div class="mosque"></div>
+    <h1 class="birthday-title">Happy Birthday 🎂</h1>
 
-<div class="eid">EID MUBARAK ✨</div>
+    <div class="birthday-name">
+      Afrin ❤️
+    </div>
 
-<button id="btn" onclick="showNote()">Show Note</button>
+    <button class="click-here" onclick="showMessage()">
+      Click Here ✨
+    </button>
 
-<div class="note" id="note">
-<p>
-Assalamualaikum,  
-Wishing all my friends a very happy and blessed Eid Mubarak.  
-May Allah fill your life with happiness, peace and success.  
+  </section>
 
-✨ Eid Mubarak ✨  
 
-<br><br>
-<b>From Suhail</b>
-</p>
-</div>
+  <!-- PAGE 2 -->
+  <section class="page" id="messagePage">
 
-<script>
+    <div class="message-container">
 
-/* stars */
+      <!-- MESSAGE -->
+      <div class="message-box">
 
-for(let i=0;i<120;i++){
-let s=document.createElement("div");
-s.className="star";
-s.style.left=Math.random()*100+"vw";
-s.style.top=Math.random()*100+"vh";
-s.style.animationDuration=(5+Math.random()*10)+"s";
-document.body.appendChild(s);
-}
+        <h1>Happy Birthday, Afrin 🤍</h1>
 
-/* REAL FIREWORKS */
+        <p>
+          Today is your day, and even though things between us are not the
+          same anymore, I still couldn't let this day pass without wishing
+          you something special.
+          <br><br>
 
-function firework(x,y){
+          Maybe life took us in different directions, and maybe we are no
+          longer together the way we once were. But some people leave a
+          place in your heart that time and distance cannot simply erase.
+          <br><br>
 
-for(let i=0;i<25;i++){
+          You were an important part of my life, and honestly, you will
+          always be someone I remember with a special place in my heart.
+          Not everything is meant to last forever, but that doesn't mean
+          it wasn't real or meaningful.
+          <br><br>
 
-let p=document.createElement("div");
-p.className="particle";
+          On your birthday, I genuinely hope life gives you every reason
+          to smile. I hope your dreams come closer, your heart feels
+          peaceful, and the future brings you happiness that stays.
+          <br><br>
 
-let angle=Math.random()*2*Math.PI;
-let radius=100+Math.random()*50;
+          So wherever life takes us from here...
+          <br>
+          I hope you never forget that once, you meant a lot to someone.
+        </p>
 
-p.style.setProperty('--x', Math.cos(angle)*radius+'px');
-p.style.setProperty('--y', Math.sin(angle)*radius+'px');
+      </div>
 
-p.style.left=x+"px";
-p.style.top=y+"px";
 
-document.body.appendChild(p);
+      <!-- PHOTO -->
+      <div class="photo-section">
 
-setTimeout(()=>p.remove(),1000);
+        <div class="photo-frame">
 
-}
-}
+          <!-- PHOTO MUST BE NAMED: afrin.jpg -->
+          <img src="afrin.jpg" alt="Afrin">
 
-/* trigger fireworks after text drop */
+        </div>
 
-setTimeout(()=>{
-firework(window.innerWidth*0.2, window.innerHeight*0.4);
-firework(window.innerWidth*0.8, window.innerHeight*0.4);
-},3000);
+        <button class="click-me" onclick="showFinal()">
+          Click Me 🤍
+        </button>
 
-/* show button after 5 sec */
+      </div>
 
-setTimeout(()=>{
-document.getElementById("btn").style.display="block";
-},5000);
+    </div>
 
-/* show note */
+  </section>
 
-function showNote(){
-document.getElementById("note").style.display="block";
-}
 
-</script>
+  <!-- PAGE 3 -->
+  <section class="page" id="finalPage">
+
+    <div class="final-card">
+
+      <div class="heart">❤️</div>
+
+      <h1>One Last Thing...</h1>
+
+      <p>
+        Maybe we are not together anymore.
+        Maybe we don't talk the way we once used to.
+        Maybe our story did not end the way either of us imagined.
+        <br><br>
+
+        But somewhere between all the memories, conversations, laughter,
+        arguments, and moments we shared...
+        you became a part of my life that I can never pretend didn't exist.
+        <br><br>
+
+        I don't know what the future holds for either of us.
+        I don't know if our paths will ever cross again.
+        But I truly hope that whenever you look back at this chapter of
+        your life, you remember that someone once cared about you deeply.
+        <br><br>
+
+        Even if we are no longer side by side,
+        I hope life treats you kindly.
+        I hope you smile more than you cry.
+        And I hope every birthday after this one brings you
+        something beautiful.
+        <br><br>
+
+        <strong>
+          Happy Birthday, Afrin. 🤍<br>
+          Maybe we are no longer together, but you'll always have a small
+          place in my heart.
+        </strong>
+
+      </p>
+
+      <div class="signature">
+        — Someone who will always wish the best for you ✨
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <script>
+
+    function showMessage() {
+
+      document.getElementById("welcomePage").classList.remove("active");
+
+      document.getElementById("messagePage").classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function showFinal() {
+
+      document.getElementById("messagePage").classList.remove("active");
+
+      document.getElementById("finalPage").classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* Create floating background particles */
+
+    for (let i = 0; i < 35; i++) {
+
+      const particle = document.createElement("div");
+
+      particle.classList.add("particle");
+
+      const size = Math.random() * 8 + 4;
+
+      particle.style.width = size + "px";
+      particle.style.height = size + "px";
+
+      particle.style.left = Math.random() * 100 + "vw";
+
+      particle.style.animationDuration =
+        Math.random() * 8 + 6 + "s";
+
+      particle.style.animationDelay =
+        Math.random() * 8 + "s";
+
+      particle.style.background =
+        `hsl(${Math.random() * 60 + 300}, 100%, 75%)`;
+
+      document.body.appendChild(particle);
+
+    }
+
+  </script>
 
 </body>
 </html>
