@@ -12,7 +12,6 @@
     :root {
       --bg: #07111f;
       --card: rgba(17, 30, 49, 0.92);
-      --card-light: #13243b;
       --accent: #4f9cff;
       --accent-2: #7c5cff;
       --success: #1fbe72;
@@ -31,8 +30,6 @@
         var(--bg);
       color: var(--text);
     }
-
-    /* ================= HEADER ================= */
 
     .header {
       width: 100%;
@@ -92,8 +89,6 @@
       color: #b8d7ff;
     }
 
-    /* ================= MAIN ================= */
-
     .main {
       width: min(1050px, 92%);
       margin: 0 auto;
@@ -108,8 +103,6 @@
     .screen.active {
       display: block;
     }
-
-    /* ================= WELCOME ================= */
 
     .hero {
       text-align: center;
@@ -143,8 +136,6 @@
       margin: auto;
       line-height: 1.7;
     }
-
-    /* ================= DETAILS CARD ================= */
 
     .details-card {
       max-width: 850px;
@@ -237,8 +228,6 @@
       transform: translateY(-2px);
       filter: brightness(1.08);
     }
-
-    /* ================= QUIZ ================= */
 
     .quiz-top {
       display: flex;
@@ -408,8 +397,6 @@
       font-size: 0.98rem;
     }
 
-    /* ================= RESULT ================= */
-
     .result-card {
       max-width: 760px;
       margin: auto;
@@ -476,8 +463,6 @@
       font-size: 0.95rem;
     }
 
-    /* ================= FOOTER ================= */
-
     footer {
       text-align: center;
       padding: 30px 15px;
@@ -489,8 +474,6 @@
       color: #9bbff0;
     }
 
-    /* ================= ANIMATION ================= */
-
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -501,8 +484,6 @@
         transform: translateY(0);
       }
     }
-
-    /* ================= MOBILE ================= */
 
     @media (max-width: 700px) {
       .header {
@@ -556,11 +537,10 @@
         font-size: 1.22rem;
       }
     }
-  </style></head><body>  <!-- ================= HEADER ================= -->  <header class="header"><div class="brand">
-
-  <div class="brand-logo">
-    <!-- Upload your logo with the exact name: suhail.png -->
-    <img src="suhail.png" alt="Suhail Practice Web Logo">
+  </style></head><body>  <header class="header">
+    <div class="brand">  <div class="brand-logo">
+    <!-- Upload logo/photo with exact filename: suhail.jpg -->
+    <img src="suhail.jpg" alt="Suhail Practice Web Logo">
   </div>
 
   <div class="brand-text">
@@ -574,12 +554,10 @@
   COST ACCOUNTING • PRACTICE TEST
 </div>
 
-  </header>  <!-- ================= MAIN ================= -->  <main class="main"><!-- WELCOME SCREEN -->
-
+  </header>  <main class="main"><!-- WELCOME SCREEN -->
 <section class="screen active" id="welcomeScreen">
 
   <div class="hero">
-
     <div class="hero-badge">
       30 Important Practice Questions
     </div>
@@ -594,7 +572,6 @@
       After every answer, the correct answer and a short explanation
       will be shown before moving to the next question.
     </p>
-
   </div>
 
 
@@ -659,7 +636,6 @@
 
 
 <!-- QUIZ SCREEN -->
-
 <section class="screen" id="quizScreen">
 
   <div class="quiz-top">
@@ -711,7 +687,6 @@
 
 
 <!-- RESULT SCREEN -->
-
 <section class="screen" id="resultScreen">
 
   <div class="result-card">
@@ -751,10 +726,6 @@
   </main>  <footer>
     Developed for practice • <strong>SUHAIL PRACTICE WEB</strong>
   </footer>  <script>
-
-    /* ==========================================================
-       30 COST ACCOUNTING MCQs
-       ========================================================== */
 
     const questions = [
 
@@ -887,4 +858,25 @@
           "Selling Overhead"
         ],
         answer: 2,
-        explanation: "Factory rent is an indirec
+        explanation: "Factory rent is an indirect production cost and is therefore a factory overhead."
+      },
+
+      {
+        question: "Allocation of overhead means:",
+        options: [
+          "Charging an entire overhead item to one cost centre",
+          "Dividing profit among departments",
+          "Ignoring indirect expenses",
+          "Adding only direct costs"
+        ],
+        answer: 0,
+        explanation: "Allocation means assigning the whole amount of an overhead item to a particular cost centre when it can be identified wholly with that centre."
+      },
+
+      {
+        question: "Apportionment of overhead means:",
+        options: [
+          "Charging all overhead to one department",
+          "Distributing common overhead among cost centres on a fair basis",
+          "Calculating profit",
+          "
