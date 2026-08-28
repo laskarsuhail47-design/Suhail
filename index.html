@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SUHAIL PRACTICE WEB | Cost Accounting Practice</title>
+
+<style>
+:root{
+    --bg:#061225;
+    --bg2:#0a1f42;
+    --card:rgba(11,29,59,.82);
+    --card2:rgba(19,46,89,.75);
+    --line:rgba(255,255,255,.12);
+    --text:#f7f9ff;
+    --muted:#aebbd2;
+    --blue:#3b82f6;
+    --blue2:#60a5fa;
+    --purple:#8b5cf6;
+    --green:#22c55e;
+    --red:#ef4444;
+    --gold:#fbbf24;
+    --shadow:0 25px 80px rgba(0,0,0,.42);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    color:var(--text);
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:
+        radial-gradient(circle at 8% 8%,rgba(46,103,208,.34),transparent 28%),
+        radial-gradient(circle at 92% 10%,rgba(126,62,204,.28),transparent 27%),
+        radial-gradient(circle at 50% 100%,rgba(31,101,197,.16),transparent 35%),
+        linear-gradient(135deg,var(--bg),var(--bg2));
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.16;
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:38px 38px;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    -webkit-tap-highlight-color:transparent;
+}
+
+.app{
+    position:relative;
+    width:min(1120px,94%);
+    margin:auto;
+    padding:28px 0 50px;
+}
+
+.screen{
+    display:none;
+    animation:screenEnter .4s ease;
+}
+
+.screen.active{
+    display:block;
+}
+
+@keyframes screenEnter{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes glow{
+    0%,100%{
+        box-shadow:0 0 30px rgba(59,130,246,.35);
+    }
+    50%{
+        box-shadow:0 0 55px rgba(139,92,246,.5);
+    }
+}
+
+.brand{
+    text-align:center;
+    margin:5px 0 28px;
+}
+
+.logo{
+    width:82px;
+    height:82px;
+    margin:auto;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:2px;
+    color:white;
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    border:3px solid rgba(255,255,255,.16);
+    animation:glow 3s infinite;
+}
+
+.brand h1{
+    margin:18px 0 7px;
+    font-size:clamp(30px,5vw,54px);
+}
+
+.subtitle{
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:3px;
+    color:#93baff;
+}
+
+.glass{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,49,94,.82),
+            rgba(7,20,46,.88)
+        );
+    border:1px solid var(--line);
+    border-radius:28px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(18px);
+}
+
+.welcome{
+    max-width:800px;
+    margin:auto;
+    padding:32px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+label{
+    font-size:13px;
+    font-weight:800;
+    color:#cad6ec;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    background:rgba(3,12,30,.58);
+    color:white;
+    outline:none;
+    transition:.2s;
+}
+
+input:focus{
+    border-color:#4f8cff;
+    box-shadow:0 0 0 4px rgba(59,130,246,.13);
+}
+
+.info{
+    margin:22px 0;
+    padding:20px;
+    border-radius:19px;
+    background:rgba(59,130,246,.08);
+    border:1px solid rgba(90,145,255,.2);
+}
+
+.info h3{
+    margin:0 0 10px;
+}
+
+.info p{
+    margin:7px 0;
+    color:var(--muted);
+}
+
+.btn{
+    border:none;
+    border-radius:16px;
+    padding:16px 22px;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:900;
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    box-shadow:0 12px 32px rgba(69,87,255,.28);
+    transition:.22s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.08);
+}
+
+.btn:active{
+    transform:scale(.98);
+}
+
+.btn.full{
+    width:100%;
+}
+
+.btn.secondary{
+    background:rgba(255,255,255,.07);
+    border:1px solid var(--line);
+    box-shadow:none;
+}
+
+.error{
+    min-height:20px;
+    margin-top:10px;
+    text-align:center;
+    color:#ff9ba6;
+    font-size:13px;
+    font-weight:700;
+}
+
+/* LEVEL SELECT */
+
+.levels-container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.student-banner{
+    margin-bottom:20px;
+    padding:18px 22px;
+    border-radius:20px;
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--line);
+    color:var(--muted);
+}
+
+.student-banner strong{
+    color:white;
+}
+
+.level-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.level-card{
+    position:relative;
+    overflow:hidden;
+    padding:24px;
+    border-radius:23px;
+    background:linear-gradient(
+        145deg,
+        rgba(23,56,105,.82),
+        rgba(9,23,50,.88)
+    );
+    border:1px solid var(--line);
+    box-shadow:0 18px 45px rgba(0,0,0,.2);
+}
+
+.level-card::before{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(139,92,246,.11);
+    right:-80px;
+    top:-80px;
+}
+
+.level-card h2{
+    position:relative;
+    margin:0 0 8px;
+}
+
+.level-card p{
+    position:relative;
+    color:var(--muted);
+    line-height:1.6;
+}
+
+.level-card .level-score{
+    position:relative;
+    margin:15px 0;
+    font-size:14px;
+    color:#cbd7eb;
+}
+
+.level-card.locked{
+    opacity:.52;
+}
+
+.level-card.locked .btn{
+    cursor:not-allowed;
+    background:#334155;
+}
+
+.level-card.passed{
+    border-color:rgba(34,197,94,.55);
+}
+
+.revision-card{
+    grid-column:1/-1;
+    padding:30px;
+    text-align:center;
+    background:
+        radial-gradient(circle at top,rgba(139,92,246,.28),transparent 50%),
+        linear-gradient(145deg,rgba(30,53,110,.85),rgba(10,19,49,.93));
+}
+
+.revision-card.locked{
+    opacity:.55;
+}
+
+.revision-card h2{
+    font-size:clamp(25px,4vw,40px);
+}
+
+/* QUIZ */
+
+.quiz{
+    max-width:940px;
+    margin:auto;
+    padding:26px;
+}
+
+.topline{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    color:var(--muted);
+    font-size:13px;
+    font-weight:800;
+}
+
+.pills{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:16px 0;
+}
+
+.pill{
+    padding:8px 12px;
+    border-radius:99px;
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--line);
+    font-size:12px;
+}
+
+.progress{
+    height:11px;
+    margin:18px 0 29px;
+    overflow:hidden;
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+}
+
+.bar{
+    height:100%;
+    width:0;
+    border-radius:30px;
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--purple),
+            #c084fc
+        );
+    transition:width .45s ease;
+}
+
+.question{
+    font-size:clamp(21px,3vw,31px);
+    line-height:1.45;
+    margin:0 0 24px;
+}
+
+.options{
+    display:grid;
+    gap:12px;
+}
+
+.option{
+    width:100%;
+    padding:17px;
+    text-align:left;
+    color:white;
+    border-radius:17px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.045);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover:not(:disabled){
+    transform:translateX(3px);
+    border-color:#528bff;
+    background:rgba(59,130,246,.1);
+}
+
+.option:disabled{
+    cursor:not-allowed;
+}
+
+.option.correct{
+    background:rgba(34,197,94,.16);
+    border-color:var(--green);
+}
+
+.option.wrong{
+    background:rgba(239,68,68,.15);
+    border-color:var(--red);
+}
+
+.feedback{
+    display:none;
+    margin-top:22px;
+    padding:21px;
+    border-radius:18px;
+    background:rgba(255,255,255,.055);
+    border:1px solid var(--line);
+}
+
+.feedback.show{
+    display:block;
+    animation:screenEnter .3s ease;
+}
+
+.status{
+    font-size:21px;
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.correctline{
+    margin-bottom:10px;
+    color:#d9e5f7;
+}
+
+.explanation{
+    white-space:pre-line;
+    color:#d4deef;
+    line-height:1.75;
+}
+
+.nextwrap{
+    display:none;
+    margin-top:20px;
+    text-align:right;
+}
+
+.nextwrap.show{
+    display:block;
+}
+
+/* RESULT SCREENS */
+
+.center{
+    max-width:800px;
+    margin:8vh auto;
+    padding:40px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 17px;
+    border-radius:99px;
+    color:#d4c6ff;
+    background:rgba(139,92,246,.14);
+    border:1px solid rgba(139,92,246,.35);
+}
+
+.bigscore{
+    margin:18px 0;
+    font-size:clamp(56px,10vw,96px);
+    font-weight:900;
+    background:
+        linear-gradient(
+            135deg,
+            white,
+            #83b7ff,
+            #d1a9ff
+        );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
+
+.small{
+    color:var(--muted);
+    line-height:1.7;
+}
+
+.pass-message{
+    color:#86efac;
+    font-weight:800;
+}
+
+.fail-message{
+    color:#fca5a5;
+    font-weight:800;
+}
+
+.ready-title{
+    font-size:clamp(29px,5vw,55px);
+    line-height:1.35;
+    margin:20px 0;
+}
+
+.resultgrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:22px 0;
+    text-align:left;
+}
+
+.resultitem{
+    padding:15px;
+    border-radius:15px;
+    color:#bfcde4;
+    background:rgba(255,255,255,.05);
+}
+
+.resultitem b{
+    color:white;
+}
+
+.wide{
+    grid-column:1/-1;
+}
+
+.final-summary{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:20px 0;
+}
+
+.summary-box{
+    padding:16px;
+    border-radius:17px;
+    background:rgba(255,255,255,.06);
+    border:1px solid var(--line);
+}
+
+.summary-box span{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:6px;
+}
+
+.summary-box strong{
+    font-size:20px;
+}
+
+.congrats{
+    margin:22px 0;
+    padding:27px;
+    border-radius:23px;
+    font-size:clamp(19px,3vw,28px);
+    font-weight:900;
+    line-height:1.55;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(251,191,36,.18),
+            rgba(139,92,246,.22)
+        );
+    border:1px solid rgba(251,191,36,.35);
+}
+
+.actions{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.actions .btn{
+    min-width:210px;
+}
+
+.fatal{
+    max-width:700px;
+    margin:12vh auto;
+    padding:30px;
+    border-radius:20px;
+    background:#2a0f16;
+    border:1px solid #ef4444;
+    color:white;
+}
+
+@media(max-width:700px){
+    .app{
+        width:94%;
+        padding-top:16px;
+    }
+
+    .welcome,
+    .quiz,
+    .center{
+        padding:21px;
+    }
+
+    .grid,
+    .level-grid,
+    .resultgrid,
+    .final-summary{
+        grid-template-columns:1fr;
+    }
+
+    .field.full,
+    .wide,
+    .revision-card{
+        grid-column:auto;
+    }
+
+    .question{
+        font-size:22px;
+    }
+
+    .option{
+        padding:15px;
+    }
+
+    .actions .btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- WELCOME -->
+
+<section id="welcomeScreen" class="screen active">
+
+    <div class="brand">
+        <div class="logo">SPW</div>
+        <h1>SUHAIL PRACTICE WEB</h1>
+        <div class="subtitle">COST ACCOUNTING PRACTICE TEST</div>
+    </div>
+
+    <div class="welcome glass">
+
+        <div class="grid">
+
+            <div class="field">
+                <label for="studentName">Student Name</label>
+                <input id="studentName" type="text" placeholder="Enter your full name">
+            </div>
+
+            <div class="field">
+                <label for="rollNumber">Roll Number</label>
+                <input id="rollNumber" type="text" placeholder="Enter roll number">
+            </div>
+
+            <div class="field">
+                <label for="semester">Semester</label>
+                <input id="semester" type="text" placeholder="Example: 1st Semester">
+            </div>
+
+            <div class="field">
+                <label for="course">Degree / Course</label>
+                <input id="course" type="text" placeholder="Enter course">
+            </div>
+
+            <div class="field full">
+                <label for="college">College Name</label>
+                <input id="college" type="text" placeholder="Enter college name">
+            </div>
+
+        </div>
+
+        <div class="info">
+            <h3>Practice System</h3>
+            <p>• 100 Important Unique Questions</p>
+            <p>• 5 Main Levels</p>
+            <p>• 20 Questions Per Level</p>
+            <p>• Minimum 15/20 Required To Pass</p>
+            <p>• Final Revision: 30 Random Repeated Questions</p>
+            <p>• Total Main Practice Score: 100</p>
+        </div>
+
+        <button id="startPracticeBtn" type="button" class="btn full">
+            START PRACTICE
+        </button>
+
+        <div id="welcomeError" class="error"></div>
+
+    </div>
+
+</section>
+
+
+<!-- LEVEL SELECTION -->
+
+<section id="levelSelectScreen" class="screen">
+
+    <div class="brand">
+        <div class="logo">SPW</div>
+        <h1>CHOOSE YOUR LEVEL</h1>
+        <div class="subtitle">COMPLETE EACH LEVEL TO UNLOCK THE NEXT</div>
+    </div>
+
+    <div class="levels-container">
+
+        <div class="student-banner">
+            Welcome, <strong id="dashboardStudent"></strong> 👋
+            <br>
+            <span>Pass each level with at least <strong>15 marks out of 20</strong>.</span>
+        </div>
+
+        <div id="levelGrid" class="level-grid"></div>
+
+    </div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quizScreen" class="screen">
+
+    <div class="brand">
+        <div class="logo">SPW</div>
+        <div class="subtitle">COST ACCOUNTING PRACTICE TEST</div>
+    </div>
+
+    <div class="quiz glass">
+
+        <div class="topline">
+            <span id="levelText"></span>
+            <span id="questionText"></span>
+            <span id="totalText"></span>
+        </div>
+
+        <div class="pills">
+            <span id="scoreText" class="pill"></span>
+            <span id="studentMini" class="pill"></span>
+        </div>
+
+        <div class="progress">
+            <div id="progressBar" class="bar"></div>
+        </div>
+
+        <h2 id="question" class="question"></h2>
+
+        <div id="options" class="options"></div>
+
+        <div id="feedback" class="feedback">
+
+            <div id="status" class="status"></div>
+
+            <div id="correctLine" class="correctline"></div>
+
+            <div id="explanation" class="explanation"></div>
+
+        </div>
+
+        <div id="nextWrap" class="nextwrap">
+            <button id="nextBtn" type="button" class="btn">
+                NEXT QUESTION →
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LEVEL RESULT -->
+
+<section id="levelResultScreen" class="screen">
+
+    <div class="center glass">
+
+        <div id="levelBadge" class="badge"></div>
+
+        <h1 id="levelResultHeading">LEVEL COMPLETED</h1>
+
+        <p class="small">
+            Student: <b id="levelStudent"></b>
+        </p>
+
+        <div id="levelScore" class="bigscore"></div>
+
+        <p id="levelResultMessage" class="small"></p>
+
+        <div class="actions">
+
+            <button id="retryLevelBtn" type="button" class="btn">
+                RETRY LEVEL
+            </button>
+
+            <button id="continueLevelBtn" type="button" class="btn">
+                CONTINUE →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REVISION INTRO -->
+
+<section id="revisionIntroScreen" class="screen">
+
+    <div class="center glass">
+
+        <div class="badge">FINAL REVISION LEVEL</div>
+
+        <h1 class="ready-title">
+            AB TAK KYA SIKHA?<br>
+            CHALO DEKHTE HAIN 🔥
+        </h1>
+
+        <p class="small">
+            You have completed all 5 main levels.
+            <br><br>
+            Now you will receive <b>30 randomly selected repeated questions</b>
+            from the 100 questions you already practiced.
+        </p>
+
+        <div class="bigscore">30</div>
+
+        <p class="small">
+            Random Revision Questions
+        </p>
+
+        <button id="readyRevisionBtn" type="button" class="btn">
+            READY 🚀
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL RESULT -->
+
+<section id="finalResultScreen" class="screen">
+
+    <div class="center glass">
+
+        <div class="logo">SPW</div>
+
+        <h1>CONGRATULATIONS! 🏆</h1>
+
+        <div class="resultgrid">
+
+            <div class="resultitem">
+                Student Name<br>
+                <b id="rName"></b>
+            </div>
+
+            <div class="resultitem">
+                Roll Number<br>
+                <b id="rRoll"></b>
+            </div>
+
+            <div class="resultitem">
+                Semester<br>
+                <b id="rSemester"></b>
+            </div>
+
+            <div class="resultitem">
+                Course<br>
+                <b id="rCourse"></b>
+            </div>
+
+            <div class="resultitem wide">
+                College<br>
+                <b id="rCollege"></b>
+            </div>
+
+        </div>
+
+        <div class="final-summary">
+
+            <div class="summary-box">
+                <span>MAIN LEVELS</span>
+                <strong id="mainScore"></strong>
+            </div>
+
+            <div class="summary-box">
+                <span>FINAL REVISION</span>
+                <strong id="revisionScore"></strong>
+            </div>
+
+            <div class="summary-box">
+                <span>TOTAL</span>
+                <strong id="overallScore"></strong>
+            </div>
+
+        </div>
+
+        <div id="congratsMessage" class="congrats"></div>
+
+        <div class="actions">
+
+            <button id="practiceAgainBtn" type="button" class="btn">
+                PRACTICE AGAIN 🔄
+            </button>
+
+            <button id="editDetailsBtn" type="button" class="btn secondary">
+                EDIT STUDENT DETAILS
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FATAL ERROR SCREEN -->
+
+<section id="fatalScreen" class="screen">
+
+    <div class="fatal">
+        <h2>Website Initialization Error</h2>
+        <p id="fatalMessage"></p>
+    </div>
+
+</section>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   QUESTION HELPER
+========================================================= */
+
+const q = (question, options, answer, explanation) => ({
+    question,
+    options,
+    answer,
+    explanation
+});
+
+
+/* =========================================================
+   EXACTLY 100 UNIQUE QUESTIONS
+   5 LEVELS × 20 QUESTIONS
+========================================================= */
+
+const BASE_QUESTIONS = [
+
+/* =========================
+   LEVEL 1 : BASICS
+========================= */
+
+q(
+"What is the primary objective of Cost Accounting?",
+[
+"To determine and control cost",
+"To prepare only a balance sheet",
+"To calculate income tax only",
+"To replace all financial accounting"
+],
+0,
+"Cost Accounting is mainly concerned with cost ascertainment, cost analysis and cost control."
+),
+
+q(
+"A cost unit is:",
+[
+"A place where costs are collected",
+"A unit of product or service for which cost is measured",
+"A type of overhead",
+"A method of stock valuation"
+],
+1,
+"A cost unit is the unit in relation to which cost is measured, such as per unit, per tonne or per passenger-kilometre."
+),
+
+q(
+"A cost centre is:",
+[
+"A product sold by a company",
+"A location, department, person or item for which costs are accumulated",
+"Only a profit centre",
+"A stock valuation method"
+],
+1,
+"A cost centre is a location, department, person, machine or item for which costs are collected."
+),
+
+q(
+"Which is a major advantage of Cost Accounting?",
+[
+"It helps management control costs",
+"It guarantees profit",
+"It removes every business risk",
+"It eliminates all expenses"
+],
+0,
+"Cost Accounting provides detailed cost information that helps management control waste and inefficiency."
+),
+
+q(
+"Which is a limitation of Cost Accounting?",
+[
+"It may be costly to install and maintain",
+"It never requires records",
+"It always predicts the future exactly",
+"It eliminates the need for management"
+],
+0,
+"A detailed costing system may require trained staff, records and ad
