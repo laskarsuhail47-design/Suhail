@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUHAIL PRACTICE WEB | Cost Accounting</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    min-height:100vh;
+    color:#f5f7ff;
+    background:linear-gradient(135deg,#07101d,#101c31,#152744);
+}
+
+.container{
+    width:min(950px,92%);
+    margin:auto;
+    padding:25px 0 40px;
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.brand{
+    font-size:24px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.logo{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #7aa7ff;
+    background:white;
+}
+
+.card{
+    background:rgba(18,31,54,.96);
+    border:1px solid rgba(120,160,220,.25);
+    border-radius:24px;
+    padding:30px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.hidden{
+    display:none !important;
+}
+
+h1{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.subtitle{
+    color:#b9c8e0;
+    line-height:1.6;
+    margin-bottom:25px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-grid input{
+    width:100%;
+    padding:15px;
+    border-radius:13px;
+    border:1px solid #3b5275;
+    background:#0b1627;
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+.form-grid input:focus{
+    border-color:#7aa7ff;
+}
+
+.full-width{
+    grid-column:1/-1;
+}
+
+button{
+    border:none;
+    border-radius:13px;
+    padding:15px 20px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(135deg,#4d86ff,#8a5cff);
+    transition:.25s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.1);
+}
+
+button:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.top-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.badge{
+    padding:8px 13px;
+    border-radius:100px;
+    background:#0b1729;
+    border:1px solid #30496c;
+    color:#a9c8ff;
+    font-size:13px;
+    font-weight:700;
+}
+
+.progress-container{
+    height:11px;
+    width:100%;
+    background:#08101d;
+    border-radius:20px;
+    overflow:hidden;
+    margin:20px 0 28px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#51c9ff,#8865ff);
+    transition:.4s ease;
+}
+
+.question{
+    font-size:23px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.option{
+    width:100%;
+    text-align:left;
+    padding:16px;
+    border:1px solid #344b6d;
+    background:#0d192b;
+    color:#f4f7ff;
+}
+
+.option:hover{
+    background:#14243e;
+}
+
+.feedback{
+    margin-top:22px;
+    padding:18px;
+    border-radius:15px;
+    line-height:1.65;
+    background:#0b1728;
+    border-left:5px solid #50bfff;
+}
+
+.feedback.correct{
+    border-left-color:#38d58a;
+}
+
+.feedback.wrong{
+    border-left-color:#ff6579;
+}
+
+.next-btn{
+    margin-top:18px;
+}
+
+.result{
+    text-align:center;
+}
+
+.score-big{
+    font-size:62px;
+    font-weight:900;
+    margin:20px 0;
+    color:#9bc1ff;
+}
+
+.result-text{
+    color:#c2d0e5;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.note{
+    margin-top:18px;
+    font-size:13px;
+    color:#93a7c4;
+    line-height:1.6;
+}
+
+@media(max-width:650px){
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .full-width{
+        grid-column:auto;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .brand{
+        font-size:18px;
+    }
+
+    h1{
+        font-size:25px;
+    }
+
+    .question{
+        font-size:20px;
+    }
+
+    .score-big{
+        font-size:50px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="brand">SUHAIL PRACTICE WEB</div>
+
+        <!-- Put your image named suhail.jpg in the same GitHub folder -->
+        <img src="suhail.jpg" class="logo" alt="Suhail Logo">
+    </div>
+
+
+    <!-- WELCOME / STUDENT DETAILS -->
+
+    <section id="welcomeSection" class="card">
+
+        <h1>Cost Accounting Practice Test</h1>
+
+        <p class="subtitle">
+            Practice important Cost Accounting concepts with theory and numerical MCQs.
+            Each level contains 20 questions. Complete all levels to get your final score out of 200.
+        </p>
+
+        <div class="form-grid">
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter Your Name"
+            >
+
+            <input
+                type="text"
+                id="rollNumber"
+                placeholder="Enter Roll Number"
+            >
+
+            <input
+                type="text"
+                id="semester"
+                placeholder="Enter Semester (Example: 3rd)"
+            >
+
+            <input
+                type="text"
+                id="degree"
+                placeholder="Enter Degree / Course"
+            >
+
+            <button
+                class="full-width"
+                id="startButton"
+                onclick="startTest()"
+            >
+                START PRACTICE
+            </button>
+
+        </div>
+
+        <p class="note">
+            Marginal Costing is excluded. The question bank includes important Cost Accounting
+            concepts, material, labour, overheads, cost sheet, reconciliation and numerical practice.
+        </p>
+
+    </section>
+
+
+    <!-- QUIZ SECTION -->
+
+    <section id="quizSection" class="card hidden">
+
+        <div class="top-info">
+
+            <div class="badge" id="levelInfo">
+                LEVEL 1 / 10
+            </div>
+
+            <div class="badge" id="questionInfo">
+                Question 1 / 20
+            </div>
+
+            <div class="badge" id="scoreInfo">
+                Score: 0 / 200
+            </div>
+
+        </div>
+
+
+        <div class="progress-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+
+        <div
+            class="question"
+            id="questionText"
+        >
+        </div>
+
+
+        <div
+            class="options"
+            id="optionsContainer"
+        >
+        </div>
+
+
+        <div
+            id="feedbackBox"
+            class="feedback hidden"
+        >
+        </div>
+
+
+        <button
+            id="nextButton"
+            class="next-btn hidden"
+            onclick="nextQuestion()"
+        >
+            NEXT QUESTION
+        </button>
+
+    </section>
+
+
+    <!-- RESULT SECTION -->
+
+    <section
+        id="resultSection"
+        class="card result hidden"
+    >
+
+        <h1 id="resultTitle">
+            Practice Complete!
+        </h1>
+
+        <div
+            class="score-big"
+            id="finalScore"
+        >
+            0 / 200
+        </div>
+
+        <p
+            class="result-text"
+            id="resultMessage"
+        >
+        </p>
+
+        <button onclick="restartPractice()">
+            PRACTICE AGAIN
+        </button>
+
+    </section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   SUHAIL PRACTICE WEB
+   PART 1 QUESTION BANK
+   PART 2 WILL CONTINUE DIRECTLY BELOW THIS CODE
+   DO NOT ADD </script>, </body> OR </html> YET
+   ========================================================= */
+
+
+const questionBank = [
+
+/* =========================
+   COST ACCOUNTING BASICS
+   ========================= */
+
+{
+question: "The main objective of Cost Accounting is to:",
+options: [
+"Ascertain and control cost",
+"Prepare only cash budgets",
+"Calculate income tax only",
+"Record only financial transactions"
+],
+answer: 0,
+explanation: "Cost Accounting mainly helps in determining, analysing and controlling the cost of products or services."
+},
+
+{
+question: "Cost means:",
+options: [
+"Amount of expenditure incurred or attributable to a thing",
+"Only the selling price of a product",
+"Only the profit earned",
+"Only cash received"
+],
+answer: 0,
+explanation: "Cost is the amount of expenditure incurred or attributable to a specific product, service or activity."
+},
+
+{
+question: "A cost unit is:",
+options: [
+"A unit of product or service for which cost is ascertained",
+"A department where products are sold",
+"A type of profit",
+"A source document"
+],
+answer: 0,
+explanation: "Examples of cost units include per tonne, per litre, per unit, passenger-kilometre, etc."
+},
+
+{
+question: "A cost centre is:",
+options: [
+"A location, person or item for which costs are accumulated",
+"A unit sold to customers",
+"A source of sales revenue",
+"A type of financial statement"
+],
+answer: 0,
+explanation: "A cost centre is a place, department, person or equipment for which costs are collected and analysed."
+},
+
+{
+question: "Prime Cost consists of:",
+options: [
+"Direct Material + Direct Labour + Direct Expenses",
+"Direct Material + Factory Overhead",
+"Labour + Selling Overhead",
+"Prime Cost + Administration Overhead"
+],
+answer: 0,
+explanation: "Prime Cost includes all direct costs.",
+formula: "Prime Cost = Direct Material + Direct Labour + Direct Expenses"
+},
+
+{
+question: "Factory Cost is generally:",
+options: [
+"Prime Cost + Factory Overhead",
+"Prime Cost + Selling Overhead",
+"Cost of Sales minus Profit",
+"Material Cost only"
+],
+answer: 0,
+explanation: "Factory Cost, also called Works Cost, includes all costs of production within the factory.",
+formula: "Factory Cost = Prime Cost + Factory Overhead"
+},
+
+{
+question: "Cost of Production is:",
+options: [
+"Factory Cost + Production Administration Overhead",
+"Prime Cost + Selling Overhead only",
+"Cost of Sales + Profit",
+"Direct Material only"
+],
+answer: 0,
+explanation: "Relevant administration expenses are added to factory cost to determine the cost of production."
+},
+
+{
+question: "Cost of Sales is:",
+options: [
+"Cost of Production + Selling and Distribution Overhead",
+"Prime Cost + Profit",
+"Material Cost + Tax only",
+"Sales Value minus Selling Price"
+],
+answer: 0,
+explanation: "Cost of Sales represents the total cost incurred to manufacture and sell goods."
+},
+
+{
+question: "Direct Material is material which:",
+options: [
+"Can be directly identified with a specific product",
+"Is used only in the office",
+"Is always purchased in cash",
+"Is never included in Prime Cost"
+],
+answer: 0,
+explanation: "Direct material can be conveniently and economically traced to a specific product, job or process."
+},
+
+{
+question: "Indirect Material is generally treated as:",
+options: [
+"Overhead",
+"Direct Labour",
+"Prime Cost only",
+"Sales Revenue"
+],
+answer: 0,
+explanation: "Indirect materials cannot be conveniently traced to a particular product and are treated as overhead."
+},
+
+{
+question: "Wages of a worker directly engaged in manufacturing a product are:",
+options: [
+"Direct Labour",
+"Indirect Material",
+"Selling Overhead",
+"Abnormal Loss"
+],
+answer: 0,
+explanation: "Wages directly traceable to a product or job are classified as Direct Labour."
+},
+
+{
+question: "Rent of a factory is normally:",
+options: [
+"Factory Overhead",
+"Direct Material",
+"Selling Overhead",
+"Direct Expense"
+],
+answer: 0,
+explanation: "Factory rent is an indirect production cost and is classified as Factory Overhead."
+},
+
+{
+question: "Advertisement expense is generally:",
+options: [
+"Selling Overhead",
+"Factory Overhead",
+"Direct Labour",
+"Direct Material"
+],
+answer: 0,
+explanation: "Advertisement is incurred to promote sales and is therefore treated as Selling Overhead."
+},
+
+{
+question: "Office salary is generally classified as:",
+options: [
+"Administration Overhead",
+"Direct Material",
+"Direct Labour",
+"Factory Overhead"
+],
+answer: 0,
+explanation: "Office salaries related to general management are administration overheads."
+},
+
+{
+question: "Freight inward on raw materials is normally:",
+options: [
+"Part of Material Cost",
+"Selling Overhead",
+"Distribution Overhead",
+"Profit"
+],
+answer: 0,
+explanation: "Freight inward is incurred to bring materials to the business and is included in material cost."
+},
+
+{
+question: "Carriage outward is generally:",
+options: [
+"Distribution Cost",
+"Direct Material",
+"Factory Overhead",
+"Prime Cost"
+],
+answer: 0,
+explanation: "Carriage outward is incurred to deliver finished goods to customers and is treated as distribution cost."
+},
+
+{
+question: "A Fixed Cost is a cost which:",
+options: [
+"Remains constant in total within a relevant range",
+"Changes proportionately with output",
+"Always becomes zero at zero output",
+"Is always a direct cost"
+],
+answer: 0,
+explanation: "Fixed cost remains constant in total within a relevant range, although fixed cost per unit changes with output."
+},
+
+{
+question: "A Variable Cost is a cost which:",
+options: [
+"Changes in total with the level of activity",
+"Never changes with output",
+"Is always an overhead",
+"Is always fixed per unit"
+],
+answer: 0,
+explanation: "Total variable cost generally changes according to the level of production or activity."
+},
+
+{
+question: "Semi-variable Cost contains:",
+options: [
+"Both fixed and variable elements",
+"Only direct material",
+"Only fixed elements",
+"Only profit elements"
+],
+answer: 0,
+explanation: "Semi-variable cost contains a fixed component and a variable component."
+},
+
+{
+question: "Controllable Cost is a cost:",
+options: [
+"That can be influenced by a responsible manager",
+"That cannot be measured",
+"That is always fixed",
+"That is always direct"
+],
+answer: 0,
+explanation: "A cost is controllable when a manager has authority to influence or control it."
+},
+
+{
+question: "Abnormal Cost is:",
+options: [
+"A cost arising from unusual or avoidable circumstances",
+"Normal production cost",
+"Selling price",
+"Always a fixed cost"
+],
+answer: 0,
+explanation: "Abnormal costs arise from unusual, unexpected or avoidable events and are generally kept separate from normal production cost."
+},
+
+{
+question: "Opportunity Cost means:",
+options: [
+"Benefit sacrificed by choosing one alternative over another",
+"Historical purchase price only",
+"Cash discount received",
+"Factory rent"
+],
+answer: 0,
+explanation: "Opportunity cost is the value of the next best alternative forgone."
+},
+
+{
+question: "Sunk Cost is:",
+options: [
+"A past cost that cannot be changed by a current decision",
+"A future avoidable cost",
+"A selling expense",
+"A variable cost only"
+],
+answer: 0,
+explanation: "Sunk costs have already been incurred and generally cannot be recovered by current decisions."
+},
+
+{
+question: "Conversion Cost equals:",
+options: [
+"Direct Labour + Production Overhead",
+"Direct Material + Direct Expense",
+"Prime Cost + Selling Cost",
+"Material + Selling Overhead"
+],
+answer: 0,
+explanation: "Conversion cost represents the cost of converting raw materials into finished goods.",
+formula: "Conversion Cost = Direct Labour + Factory / Production Overhead"
+},
+
+{
+question: "Cost classification means:",
+options: [
+"Grouping costs according to common characteristics",
+"Increasing the selling price",
+"Ignoring overheads",
+"Preparing only financial accounts"
+],
+answer: 0,
+explanation: "Cost classification groups costs according to nature, function, behaviour, controllability or other characteristics."
+},
+
+/* =========================
+   MATERIAL CONTROL
+   ========================= */
+
+{
+question: "The Stores Department is mainly responsible for:",
+options: [
+"Receipt, custody and issue of materials",
+"Preparing salary sheets only",
+"Advertising products",
+"Calculating income tax"
+],
+answer: 0,
+explanation: "The stores department receives, stores, protects and issues materials."
+},
+
+{
+question: "A Purchase Requisition is normally raised by:",
+options: [
+"The department requiring materials",
+"The customer",
+"The bank",
+"The auditor"
+],
+answer: 0,
+explanation: "A purchase requisition is an internal request for purchasing required materials."
+},
+
+{
+question: "A Purchase Order is sent to:",
+options: [
+"The supplier",
+"The production worker",
+"The customer",
+"The tax department"
+],
+answer: 0,
+explanation: "A purchase order formally communicates the buyer's requirements to the supplier."
+},
+
+{
+question: "A Goods Received Note is prepared when:",
+options: [
+"Materials are received and checked",
+"Finished goods are sold",
+"Wages are paid",
+"Profit is calculated"
+],
+answer: 0,
+explanation: "A Goods Received Note records the receipt and inspection of materials."
+},
+
+{
+question: "A Bin Card is maintained for:",
+options: [
+"Quantities of a particular material",
+"Cash transactions",
+"Sales returns",
+"Employee attendance"
+],
+answer: 0,
+explanation: "A bin card records receipts, issues and balance quantities of material in the store."
+},
+
+{
+question: "A Stores Ledger records:",
+options: [
+"Receipts, issues and balances of materials in quantity and value",
+"Only cash balance",
+"Only sales quantity",
+"Only employee hours"
+],
+answer: 0,
+explanation: "The stores ledger generally maintains both quantity and value details of materials."
+},
+
+{
+question: "FIFO means materials are issued from:",
+options: [
+"The oldest available stock first",
+"The newest stock first",
+"The highest priced stock first",
+"Average priced stock only"
+],
+answer: 0,
+explanation: "FIFO means First In, First Out."
+},
+
+{
+question: "LIFO means materials are issued from:",
+options: [
+"The most recently received stock first",
+"The oldest stock first",
+"The lowest priced stock first",
+"Average stock first"
+],
+answer: 0,
+explanation: "LIFO means Last In, First Out."
+},
+
+{
+question: "Weighted Average Price method uses:",
+options: [
+"Total cost of stock divided by total quantity",
+"Latest purchase price only",
+"Oldest purchase price only",
+"Selling price"
+],
+answer: 0,
+explanation: "The weighted average method determines an average material price based on quantity and total cost.",
+formula: "Weighted Average Price = Total Cost of Materials / Total Quantity"
+},
+
+{
+question: "Stock Verification is conducted to:",
+options: [
+"Compare physical stock with stock records",
+"Increase selling price",
+"Calculate profit only",
+"Prepare advertisements"
+],
+answer: 0,
+explanation: "Stock verification checks whether actual physical quantities agree with recorded quantities."
+},
+
+{
+question: "Perpetual Inventory System means:",
+options: [
+"Continuous recording of material receipts and issues",
+"Annual stock count only",
+"No stock records",
+"Cash-only accounting"
+],
+answer: 0,
+explanation: "Under perpetual inventory, stock records are continuously updated."
+},
+
+{
+question: "Stock-out Cost arises when:",
+options: [
+"Required material is unavailable",
+"Material is received early",
+"Selling price falls",
+"Workers receive overtime"
+],
+answer: 0,
+explanation: "Stock-out costs may include lost production, emergency purchases and lost sales."
+},
+
+{
+question: "Holding Cost is associated with:",
+options: [
+"Keeping inventory in store",
+"Placing an order only",
+"Selling goods",
+"Paying income tax"
+],
+answer: 0,
+explanation: "Holding or carrying cost includes storage, insurance, deterioration and cost of capital."
+},
+
+{
+question: "Ordering Cost is incurred in:",
+options: [
+"Placing and processing purchase orders",
+"Storing material for years",
+"Manufacturing direct labour",
+"Advertising"
+],
+answer: 0,
+explanation: "Ordering cost includes clerical, communication and processing expenses related to purchasing."
+},
+
+{
+question: "Re-order Level indicates:",
+options: [
+"The stock level at which a new order should be placed",
+"Maximum selling price",
+"Minimum wage rate",
+"Final profit"
+],
+answer: 0,
+explanation: "Re-order level helps ensure a new order is placed before stock reaches a critical level."
+},
+
+{
+question: "Maximum Stock Level helps prevent:",
+options: [
+"Overstocking",
+"All material issues",
+"Employee turnover",
+"Sales revenue"
+],
+answer: 0,
+explanation: "Maximum level prevents excessive investment and unnecessary holding costs."
+},
+
+{
+question: "Minimum Stock Level is maintained to reduce the risk of:",
+options: [
+"Stock-out",
+"Overpricing",
+"Overtime",
+"Profit"
+],
+answer: 0,
+explanation: "Minimum stock level provides a safety quanti
+/* =========================
+   PART 2 - CONTINUATION
+   ========================= */
+
+,
+
+{
+question: "Safety Stock is maintained mainly to:",
+options: [
+"Protect against unexpected shortage",
+"Increase selling price",
+"Reduce wages",
+"Calculate profit"
+],
+answer: 0,
+explanation: "Safety stock provides protection against unexpected demand or delays in supply."
+},
+
+{
+question: "If Opening Stock is ₹8,000, Purchases ₹50,000 and Closing Stock ₹12,000, material consumed is:",
+options: [
+"₹46,000",
+"₹54,000",
+"₹58,000",
+"₹42,000"
+],
+answer: 0,
+explanation: "Opening stock is added to purchases and closing stock is deducted.",
+formula: "Material Consumed = 8,000 + 50,000 − 12,000 = ₹46,000"
+},
+
+{
+question: "If 1,000 units are purchased for ₹20,000, the purchase price per unit is:",
+options: [
+"₹20",
+"₹10",
+"₹25",
+"₹30"
+],
+answer: 0,
+explanation: "Divide total purchase cost by quantity.",
+formula: "Price per unit = 20,000 ÷ 1,000 = ₹20"
+},
+
+{
+question: "Material handling cost is generally treated as:",
+options: [
+"Overhead",
+"Direct material",
+"Direct labour",
+"Profit"
+],
+answer: 0,
+explanation: "Material handling is usually an indirect cost and is treated as overhead."
+},
+
+{
+question: "Inventory Control aims to maintain:",
+options: [
+"Optimum stock levels",
+"No stock at all",
+"Unlimited stock",
+"Only finished goods"
+],
+answer: 0,
+explanation: "The objective is to avoid both overstocking and stock-outs."
+},
+
+{
+question: "Which document helps in checking whether materials received match the order?",
+options: [
+"Goods Received Note",
+"Job Card",
+"Time Card",
+"Payroll"
+],
+answer: 0,
+explanation: "A Goods Received Note records details of materials received and checked."
+},
+
+{
+question: "Normal loss in material storage may arise due to:",
+options: [
+"Evaporation or unavoidable deterioration",
+"Advertisement",
+"Profit",
+"Sales commission"
+],
+answer: 0,
+explanation: "Some losses are unavoidable and considered normal depending on the nature of material."
+},
+
+{
+question: "A stock register generally records:",
+options: [
+"Material receipts, issues and balances",
+"Only employee names",
+"Only sales",
+"Only profit"
+],
+answer: 0,
+explanation: "Stock records track the movement and balance of inventory."
+},
+
+{
+question: "Which cost is included in the purchase cost of materials?",
+options: [
+"Freight inward",
+"Carriage outward",
+"Sales commission",
+"Advertisement"
+],
+answer: 0,
+explanation: "Freight inward is incurred to bring materials into the business."
+},
+
+{
+question: "Material cost includes purchase price less:",
+options: [
+"Trade discount",
+"Profit",
+"Factory overhead",
+"Direct wages"
+],
+answer: 0,
+explanation: "Trade discounts reduce the purchase price of materials."
+},
+
+{
+question: "If a worker saves 10 hours and receives 50% of the value of time saved under Halsey Plan, the plan rewards:",
+options: [
+"Part of the time saved",
+"All time saved as wages",
+"No time saved",
+"Only overtime"
+],
+answer: 0,
+explanation: "Under the Halsey Plan, the worker and employer share the benefit of time saved."
+},
+
+{
+question: "Labour productivity means:",
+options: [
+"Output produced per unit of labour input",
+"Total number of workers only",
+"Only wage rate",
+"Only overtime hours"
+],
+answer: 0,
+explanation: "Productivity measures the efficiency of labour in producing output."
+},
+
+{
+question: "If a worker is paid ₹150 per hour and works 35 hours, wages are:",
+options: [
+"₹5,250",
+"₹5,000",
+"₹4,500",
+"₹6,250"
+],
+answer: 0,
+explanation: "Multiply wage rate by hours worked.",
+formula: "Wages = 150 × 35 = ₹5,250"
+},
+
+{
+question: "If a worker produces 600 units at ₹5 per unit, wages are:",
+options: [
+"₹3,000",
+"₹2,500",
+"₹3,500",
+"₹4,000"
+],
+answer: 0,
+explanation: "Under piece rate, wages depend on output.",
+formula: "Wages = 600 × 5 = ₹3,000"
+},
+
+{
+question: "Idle time caused by normal machine setup is generally:",
+options: [
+"Normal idle time",
+"Abnormal loss",
+"Direct material",
+"Selling overhead"
+],
+answer: 0,
+explanation: "Some idle time is unavoidable in normal operations."
+},
+
+{
+question: "Idle time due to an abnormal strike is generally:",
+options: [
+"Abnormal idle time",
+"Normal direct labour",
+"Direct material",
+"Selling cost"
+],
+answer: 0,
+explanation: "Unusual disruptions are generally treated separately as abnormal idle time."
+},
+
+{
+question: "The main purpose of a Job Card is to:",
+options: [
+"Record time spent on a specific job",
+"Record material purchase only",
+"Calculate sales",
+"Prepare advertisements"
+],
+answer: 0,
+explanation: "A Job Card helps assign labour cost to a particular job."
+},
+
+{
+question: "The main purpose of a Time Card is to:",
+options: [
+"Record attendance and working time",
+"Record stock",
+"Record sales",
+"Calculate profit"
+],
+answer: 0,
+explanation: "Time cards are used for time keeping."
+},
+
+{
+question: "Labour turnover may result in:",
+options: [
+"Higher recruitment and training costs",
+"Zero training requirement",
+"Lower record keeping",
+"No productivity effect"
+],
+answer: 0,
+explanation: "High turnover often increases recruitment and training expenditure."
+},
+
+{
+question: "Indirect wages of a factory supervisor are:",
+options: [
+"Factory overhead",
+"Direct material",
+"Selling cost",
+"Direct expense"
+],
+answer: 0,
+explanation: "A supervisor's wages are generally indirect to individual products."
+},
+
+{
+question: "Overhead absorption is necessary because:",
+options: [
+"Indirect costs must be charged to products or jobs",
+"Direct material must be ignored",
+"Sales must be reduced",
+"Profit must be removed"
+],
+answer: 0,
+explanation: "Overheads cannot usually be directly traced to one product and require a suitable absorption basis."
+},
+
+{
+question: "If actual overhead is ₹90,000 and absorbed overhead is ₹85,000, the result is:",
+options: [
+"Under-absorption of ₹5,000",
+"Over-absorption of ₹5,000",
+"No difference",
+"Profit of ₹5,000"
+],
+answer: 0,
+explanation: "Absorbed overhead is lower than actual overhead.",
+formula: "Under-absorption = 90,000 − 85,000 = ₹5,000"
+},
+
+{
+question: "If actual overhead is ₹70,000 and absorbed overhead is ₹75,000, the result is:",
+options: [
+"Over-absorption of ₹5,000",
+"Under-absorption of ₹5,000",
+"No difference",
+"Loss of ₹5,000"
+],
+answer: 0,
+explanation: "More overhead has been absorbed than actually incurred.",
+formula: "Over-absorption = 75,000 − 70,000 = ₹5,000"
+},
+
+{
+question: "Which is an example of factory overhead?",
+options: [
+"Factory lighting",
+"Direct material used in a product",
+"Sales commission",
+"Advertisement"
+],
+answer: 0,
+explanation: "Factory lighting is an indirect cost of production."
+},
+
+{
+question: "Which is an example of administration overhead?",
+options: [
+"Office rent",
+"Raw material",
+"Direct wages",
+"Carriage outward"
+],
+answer: 0,
+explanation: "Office rent is generally associated with administration."
+},
+
+{
+question: "Which is an example of selling overhead?",
+options: [
+"Salesmen's salary",
+"Factory rent",
+"Raw material",
+"Machine depreciation in production"
+],
+answer: 0,
+explanation: "Salesmen's salary is incurred to obtain sales."
+},
+
+{
+question: "Which is an example of distribution overhead?",
+options: [
+"Carriage outward",
+"Factory power",
+"Direct labour",
+"Office salary"
+],
+answer: 0,
+explanation: "Carriage outward is associated with delivering goods."
+},
+
+{
+question: "If total factory overhead is ₹1,20,000 and direct labour hours are 24,000, labour hour rate is:",
+options: [
+"₹5",
+"₹4",
+"₹6",
+"₹10"
+],
+answer: 0,
+explanation: "Divide overhead by direct labour hours.",
+formula: "Rate = 1,20,000 ÷ 24,000 = ₹5 per hour"
+},
+
+{
+question: "If machine overhead is ₹90,000 and machine hours are 15,000, machine hour rate is:",
+options: [
+"₹6",
+"₹5",
+"₹7",
+"₹8"
+],
+answer: 0,
+explanation: "Divide total machine overhead by total machine hours.",
+formula: "Machine Hour Rate = 90,000 ÷ 15,000 = ₹6"
+},
+
+{
+question: "If a job uses 150 machine hours and the machine hour rate is ₹8, overhead charged is:",
+options: [
+"₹1,200",
+"₹1,000",
+"₹1,500",
+"₹800"
+],
+answer: 0,
+explanation: "Multiply machine hours by machine hour rate.",
+formula: "Overhead = 150 × 8 = ₹1,200"
+},
+
+{
+question: "Cost Sheet is prepared mainly to:",
+options: [
+"Ascertain the total and per-unit cost",
+"Prepare only tax returns",
+"Record bank transactions",
+"Calculate interest only"
+],
+answer: 0,
+explanation: "A cost sheet summarises different elements of cost."
+},
+
+{
+question: "A Cost Sheet generally begins with:",
+options: [
+"Direct Material",
+"Net Profit",
+"Selling Price",
+"Distribution Cost"
+],
+answer: 0,
+explanation: "Material cost is generally one of the first major elements shown."
+},
+
+{
+question: "Prime Cost plus Factory Overhead gives:",
+options: [
+"Factory Cost",
+"Cost of Sales",
+"Profit",
+"Sales"
+],
+answer: 0,
+explanation: "Factory overhead is added to prime cost.",
+formula: "Factory Cost = Prime Cost + Factory Overhead"
+},
+
+{
+question: "Factory Cost plus administration overhead gives:",
+options: [
+"Cost of Production",
+"Prime Cost",
+"Profit",
+"Sales"
+],
+answer: 0,
+explanation: "Administration overhead relating to production is added.",
+formula: "Cost of Production = Factory Cost + Administration Overhead"
+},
+
+{
+question: "Cost of Production plus selling and distribution cost gives:",
+options: [
+"Cost of Sales",
+"Prime Cost",
+"Factory Cost",
+"Profit"
+],
+answer: 0,
+explanation: "Selling and distribution expenses are added to reach Cost of Sales."
+},
+
+{
+question: "If Sales are ₹5,00,000 and Cost of Sales is ₹4,00,000, Profit is:",
+options: [
+"₹1,00,000",
+"₹90,000",
+"₹80,000",
+"₹1,20,000"
+],
+answer: 0,
+explanation: "Profit equals sales minus cost of sales.",
+formula: "Profit = 5,00,000 − 4,00,000 = ₹1,00,000"
+},
+
+{
+question: "If Profit is 25% of Cost and Cost is ₹80,000, Sales are:",
+options: [
+"₹1,00,000",
+"₹90,000",
+"₹1,05,000",
+"₹80,000"
+],
+answer: 0,
+explanation: "Profit is calculated on cost and added to cost.",
+formula: "Profit = 25% × 80,000 = 20,000; Sales = 80,000 + 20,000 = ₹1,00,000"
+},
+
+{
+question: "If Profit is 20% of Sales and Sales are ₹1,50,000, Cost is:",
+options: [
+"₹1,20,000",
+"₹1,30,000",
+"₹1,10,000",
+"₹1,00,000"
+],
+answer: 0,
+explanation: "Calculate profit on sales and subtract it.",
+formula: "Profit = 20% × 1,50,000 = 30,000; Cost = 1,50,000 − 30,000 = ₹1,20,000"
+},
+
+{
+question: "Direct Material is ₹30,000, Direct Labour ₹20,000 and Direct Expenses ₹10,000. Prime Cost is:",
+options: [
+"₹60,000",
+"₹50,000",
+"₹70,000",
+"₹40,000"
+],
+answer: 0,
+explanation: "Prime cost includes all direct costs.",
+formula: "Prime Cost = 30,000 + 20,000 + 10,000 = ₹60,000"
+},
+
+{
+question: "Prime Cost is ₹60,000 and Factory Overhead is 25% of Prime Cost. Factory Cost is:",
+options: [
+"₹75,000",
+"₹70,000",
+"₹80,000",
+"₹90,000"
+],
+answer: 0,
+explanation: "First calculate 25% of prime cost.",
+formula: "Factory Overhead = 25% × 60,000 = 15,000; Factory Cost = 60,000 + 15,000 = ₹75,000"
+},
+
+{
+question: "Factory Cost is ₹1,00,000 and Administration Overhead is 10% of Factory Cost. Cost of Production is:",
+options: [
+"₹1,10,000",
+"₹1,05,000",
+"₹1,20,000",
+"₹1,00,000"
+],
+answer: 0,
+explanation: "Administration overhead is added to factory cost.",
+formula: "Administration Overhead = 10,000; Cost of Production = 1,00,000 + 10,000 = ₹1,10,000"
+},
+
+{
+question: "Cost of Production is ₹1,50,000 and Selling & Distribution Overhead is 20% of Cost of Production. Cost of Sales is:",
+options: [
+"₹1,80,000",
+"₹1,70,000",
+"₹1,60,000",
+"₹2,00,000"
+],
+answer: 0,
+explanation: "Calculate selling and distribution overhead and add it.",
+formula: "Overhead = 20% × 1,50,000 = 30,000; Cost of Sales = ₹1,80,000"
+},
+
+{
+question: "If total cost is ₹2,00,000 for 4,000 units, cost per unit is:",
+options: [
+"₹50",
+"₹40",
+"₹60",
+"₹80"
+],
+answer: 0,
+explanation: "Divide total cost by output.",
+formula: "Cost per unit = 2,00,000 ÷ 4,000 = ₹50"
+},
+
+{
+question: "If 5,000 units are produced and total factory cost is ₹3,00,000, factory cost per unit is:",
+options: [
+"₹60",
+"₹50",
+"₹70",
+"₹80"
+],
+answer: 0,
+explanation: "Divide total factory cost by units.",
+formula: "Factory Cost per unit = 3,00,000 ÷ 5,000 = ₹60"
+},
+
+{
+question: "A cost centre may be:",
+options: [
+"A department",
+"Only a finished product",
+"Only a customer",
+"Only a profit figure"
+],
+answer: 0,
+explanation: "A department is a common example of a cost centre."
+},
+
+{
+question: "A cost unit for transport service may be:",
+options: [
+"Passenger-kilometre",
+"One accountant",
+"One department",
+"One machine only"
+],
+answer: 0,
+explanation: "Transport cost can be measured per passenger-kilometre or tonne-kilometre."
+},
+
+{
+question: "A cost unit for electricity generation may be:",
+options: [
+"Kilowatt-hour",
+"Square metre",
+"Employee",
+"Department"
+],
+answer: 0,
+explanation: "Electricity generation is commonly measured in kilowatt-hours."
+},
+
+{
+question: "Direct expenses are expenses which:",
+options: [
+"Can be directly identified with a specific cost unit",
+"Are always office expenses",
+"Are always selling expenses",
+"Can never be traced"
+],
+answer: 0,
+explanation: "Direct expenses can be conveniently charged to a specific product or job."
+},
+
+{
+question: "Royalty paid per unit produced is generally treated as:",
+options: [
+"Direct Expense",
+"Indirect Material",
+"Selling Overhead only",
+"Profit"
+],
+answer: 0,
+explanation: "When directly related to production, royalty per unit is generally a direct expense."
+},
+
+{
+question: "Special design charges for a specific job are generally:",
+options: [
+"Direct Expenses",
+"Indirect wages",
+"Administration overhead",
+"Distribution cost"
+],
+answer: 0,
+explanation: "Charges specifically incurred for one job are direct expenses."
+},
+
+{
+question: "Which cost is generally excluded from normal production cost?",
+options: [
+"Abnormal loss",
+"Normal material consumption",
+"Direct labour",
+"Factory overhead"
+],
+answer: 0,
+explanation: "Abnormal losses are generally treated separately."
+},
+
+{
+question: "Cost Control involves:",
+options: [
+"Taking action to keep costs within planned limits",
+"Only recording costs",
+"Only increasing production",
+"Ignoring standards"
+],
+answer: 0,
+explanation: "Cost control includes planning, comparison and corrective action."
+},
+
+{
+question: "Cost Reduction aims at:",
+options: [
+"Permanent reduction in unit cost without reducing quality",
+"Temporary reduction only",
+"Increasing unnecessary expenses",
+"Stopping all production"
+],
+answer: 0,
+explanation: "Cost reduction seeks sustainable savings while maintaining required quality and performance."
+},
+
+{
+question: "Cost Ascertainment means:",
+options: [
+"Determining the cost of a product or service",
+"Determining only sales",
+"Calculating only profit",
+"Preparing advertisements"
+],
+answer: 0,
+explanation: "Cost ascertainment determines how much it costs to produce goods or provide services."
+},
+
+{
+question: "Which method is useful when products are manufactured according to customer orders?",
+options: [
+"Job Costing",
+"Unit Costing only",
+"Financial Accounting",
+"Cash Accounting"
+],
+answer: 0,
+explanation: "Job costing is appropriate when each job is separately identifiable."
+},
+
+{
+question: "Batch Costing is suitable when:",
+options: [
+"Similar items are produced in batches",
+"Only one unique service is provided",
+"No production occurs",
+"Only salaries are paid"
+],
+answer: 0,
+explanation: "Batch costing determines the cost of a batch of similar products."
+},
+
+{
+question: "Process Costing is suitable when:",
+options: [
+"Production is continuous and involves processes",
+"Each job is completely unique",
+"Only one customer exists",
+"Only cash transactions occur"
+],
+answer: 0,
+explanation: "Process costing is used for continuous or mass production through processes."
+},
+
+{
+question: "Unit Costing is suitable for:",
+options: [
+"Homogeneous products",
+"Highly customised jobs only",
+"Only administration work",
+"Only marketing"
+],
+answer: 0,
+explanation: "Unit costing is used when identical units are produced."
+},
+
+{
+question: "Operating Costing is commonly used for:",
+options: [
+"Transport and service organisations",
+"Only manufacturing machinery",
+"Only banking profit",
+"Only inventory valuation"
+],
+answer: 0,
+explanation: "Operating costing is used for services such as transport, hospitals and hotels."
+},
+
+{
+question: "Contract Costing is suitable for:",
+options: [
+"Large construction projects",
+"Small identical units only",
+"Inventory stores only",
+"Office administration"
+],
+answer: 0,
+explanation: "Contract costing is commonly used for construction and long-term projects."
+},
+
+{
+question: "Joint Products are products:",
+options: [
+"Produced simultaneously from the same process",
+"Purchased from separate suppliers only",
+"Sold without cost",
+"Always abnormal losses"
+],
+answer: 0,
+explanation: "Joint products arise from a common process and have significant value."
+},
+
+{
+question: "By-products generally have:",
+options: [
+"Lower value compared with main products",
+"Always higher value",
+"No production cost",
+"No selling value ever"
+],
+answer: 0,
+explanation: "By-products usually have relatively lower value than the main products."
+},
+
+{
+question: "A Cost Ledger is maintained to:",
+options: [
+"Record cost accounting transactions",
+"Record only personal expenses",
+"Record only bank balances",
+"Record only advertisements"
+],
+answer: 0,
+explanation: "Cost ledger contains accounts used for recording cost transactions."
+},
+
+{
+question: "Cost Accounting differs from Financial Accounting because Cost Accounting mainly focuses on:",
+options: [
+"Cost ascertainment and control",
+"Only external reporting",
+"Only tax filing",
+"Only shareholder dividends"
+],
+answer: 0,
+explanation: "Cost accounting provides detailed information for internal cost management."
+},
+
+{
+question: "Financial Accounting primarily reports:",
+options: [
+"Overall financial performance and position",
+"Only material issue rates",
+"Only labour efficiency",
+"Only machine hours"
+],
+answer: 0,
+explanation: "Financial accounting provides overall financial information."
+},
+
+{
+question: "One limitation of Cost Accounting is that:",
+options: [
+"It depends on assumptions and estimates in some areas",
+"It never provides useful information",
+"It cannot record any costs",
+"It eliminates all business risks"
+],
+answer: 0,
+explanation: "Some cost allocations and estimates involve judgement."
+},
+
+{
+question: "Cost Accounting information is useful for:",
+options: [
+"Management decision making",
+"Only customers",
+"Only competitors",
+"Only government elections"
+],
+answer: 0,
+explanation: "Managers use cost information for planning, control and decision making."
+},
+
+{
+question: "A cost sheet can help management in:",
+options: [
+"Price quotation and cost control",
+"Only attendance recording",
+"Only stock counting",
+"Only advertising"
+],
+answer: 0,
+explanation: "Cost sheets provide detailed cost information useful for pricing and control."
+},
+
+{
+question: "The term overhead refers to:",
+options: [
+"Aggregate of indirect material, indirect labour and indirect expenses",
+"Only direct wages",
+"Only material cost",
+"Only selling price"
+],
+answer: 0,
+explanation: "Overhead is the total of indirect costs."
+},
+
+{
+question: "Which is NOT a direct cost?",
+options: [
+"Factory rent",
+"Direct material",
+"Direct wages",
+"Direct expense"
+],
+answer: 0,
+explanation: "Factory rent cannot normally be directly traced to one unit and is overhead."
+},
+
+{
+question: "Prime Cost is also called:",
+options: [
+"Direct Cost",
+"Indirect Cost",
+"Distribution Cost",
+"Selling Price"
+],
+answer: 0,
+explanation: "Prime cost consists of direct material, direct labour and direct expenses."
+},
+
+{
+question: "If Direct Material is ₹40,000 and Direct Labour is ₹30,000 with no direct expenses, Prime Cost is:",
+options: [
+"₹70,000",
+"₹60,000",
+"₹80,000",
+"₹90,000"
+],
+answer: 0,
+explanation: "Add direct material and direct labour.",
+formula: "Prime Cost = 40,000 + 30,000 = ₹70,000"
+},
+
+{
+question: "If Prime Cost is ₹70,000 and Factory Overhead is ₹20,000, Works Cost is:",
+options: [
+"₹90,000",
+"₹80,000",
+"₹1,00,000",
+"₹70,000"
+],
+answer: 0,
+explanation: "Works Cost is another name f
