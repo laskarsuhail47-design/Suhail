@@ -1,0 +1,685 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUHAIL PRACTICE WEB | Cost Accounting Practice</title>
+<style>
+:root{
+--bg:#061225;--bg2:#0b2144;--card:rgba(12,30,61,.82);
+--line:rgba(255,255,255,.12);--text:#f7f9ff;--muted:#aebbd2;
+--blue:#3b82f6;--purple:#8b5cf6;--green:#22c55e;--red:#ef4444;
+--gold:#fbbf24;--shadow:0 25px 80px rgba(0,0,0,.42)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+margin:0;min-height:100vh;color:var(--text);
+font-family:Inter,Segoe UI,Arial,sans-serif;
+background:
+radial-gradient(circle at 8% 8%,rgba(46,103,208,.34),transparent 28%),
+radial-gradient(circle at 92% 10%,rgba(126,62,204,.28),transparent 27%),
+linear-gradient(135deg,var(--bg),var(--bg2));
+}
+body:before{
+content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;
+background-image:
+linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+background-size:38px 38px
+}
+.app{position:relative;width:min(1100px,94%);margin:auto;padding:28px 0 45px}
+.screen{display:none;animation:enter .4s ease}
+.screen.active{display:block}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.brand{text-align:center;margin:5px 0 26px}
+.logo{
+width:78px;height:78px;margin:auto;border-radius:50%;
+display:grid;place-items:center;font-weight:900;font-size:22px;letter-spacing:2px;
+background:linear-gradient(135deg,var(--blue),var(--purple));
+border:3px solid rgba(255,255,255,.18);
+box-shadow:0 0 45px rgba(87,99,255,.45)
+}
+h1{font-size:clamp(30px,5vw,55px);margin:18px 0 7px}
+.subtitle{font-size:12px;font-weight:900;letter-spacing:3px;color:#8eb7ff}
+.glass{
+background:linear-gradient(145deg,rgba(20,49,94,.78),rgba(8,21,47,.88));
+border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);
+backdrop-filter:blur(18px)
+}
+.welcome,.dashboard,.quiz,.center{max-width:900px;margin:auto;padding:32px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+label{font-size:13px;color:#cad6ec;font-weight:700}
+input{
+padding:15px;border-radius:14px;border:1px solid var(--line);
+background:rgba(3,12,30,.56);color:#fff;font-size:15px;outline:none
+}
+input:focus{border-color:#4f8cff;box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+.info,.intro{
+margin:22px 0;padding:20px;border-radius:18px;
+background:rgba(59,130,246,.08);border:1px solid rgba(90,145,255,.2)
+}
+.info h3,.intro h2{margin:0 0 10px}
+.info p{margin:6px 0;color:var(--muted)}
+.btn{
+border:0;border-radius:15px;padding:16px 22px;cursor:pointer;color:#fff;
+font-size:15px;font-weight:900;
+background:linear-gradient(135deg,var(--blue),var(--purple));
+box-shadow:0 10px 30px rgba(69,87,255,.27);transition:.22s
+}
+.btn:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.08)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.full{width:100%}
+.btn.secondary{background:rgba(255,255,255,.07);border:1px solid var(--line);box-shadow:none}
+.error{min-height:20px;color:#ff9ba6;text-align:center;margin-top:10px;font-size:13px}.level-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:25px}
+.level-card{
+padding:23px;border-radius:20px;border:1px solid var(--line);
+background:rgba(255,255,255,.045);transition:.25s
+}
+.level-card:hover:not(.locked){transform:translateY(-4px);border-color:rgba(100,145,255,.5)}
+.level-card.final{grid-column:1/-1;background:linear-gradient(135deg,rgba(59,130,246,.14),rgba(139,92,246,.17))}
+.level-card h3{margin:0 0 8px;font-size:22px}
+.level-card p{color:var(--muted);line-height:1.6;min-height:48px}
+.level-status{font-size:12px;font-weight:900;letter-spacing:1px;margin-bottom:14px}
+.unlocked{color:#8fbbff}.passed{color:#76e7a1}.locked{opacity:.55}.locked .btn{cursor:not-allowed}
+.dashboard-head{text-align:center}
+.student-line{color:var(--muted);margin-top:8px}
+.topline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:13px;font-weight:800}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.pill{padding:8px 12px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-size:12px}
+.progress{height:10px;background:rgba(255,255,255,.08);border-radius:30px;overflow:hidden;margin:17px 0 28px}
+.bar{height:100%;width:0;border-radius:30px;transition:width .45s ease;background:linear-gradient(90deg,var(--blue),var(--purple),#c084fc)}
+.question{font-size:clamp(21px,3vw,31px);line-height:1.45;margin:0 0 24px}
+.options{display:grid;gap:12px}
+.option{
+width:100%;text-align:left;padding:17px;border-radius:17px;color:#fff;
+font-size:15px;background:rgba(255,255,255,.045);border:1px solid var(--line);
+cursor:pointer;transition:.2s
+}
+.option:hover:not(:disabled){transform:translateX(3px);border-color:#528bff;background:rgba(59,130,246,.1)}
+.option:disabled{cursor:not-allowed}
+.option.correct{background:rgba(34,197,94,.16);border-color:var(--green)}
+.option.wrong{background:rgba(239,68,68,.15);border-color:var(--red)}
+.feedback{
+display:none;margin-top:22px;padding:20px;border-radius:18px;
+background:rgba(255,255,255,.055);border:1px solid var(--line)
+}
+.feedback.show{display:block;animation:enter .35s ease}
+.status{font-size:20px;font-weight:900;margin-bottom:9px}
+.correctline{color:#d8e1f1;margin-bottom:10px}
+.explanation{white-space:pre-line;color:#d4deef;line-height:1.72}
+.nextwrap{display:none;margin-top:20px;text-align:right}
+.nextwrap.show{display:block}
+.center{text-align:center;margin:7vh auto}
+.badge{display:inline-block;padding:9px 17px;border-radius:99px;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.32);color:#cbb8ff}
+.bigscore{
+font-size:clamp(55px,10vw,92px);font-weight:900;margin:16px 0;
+background:linear-gradient(135deg,#fff,#83b7ff,#c8a8ff);
+-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.small{color:var(--muted);line-height:1.7}
+.passbox,.failbox,.top3{
+padding:24px;border-radius:22px;margin:20px 0;font-size:20px;font-weight:800;line-height:1.6
+}
+.passbox{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3)}
+.failbox{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3)}
+.top3{background:linear-gradient(135deg,rgba(255,193,59,.18),rgba(139,92,246,.2));border:1px solid rgba(255,210,98,.35)}
+.resultgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:left;margin:22px 0}
+.resultitem{padding:14px;border-radius:14px;background:rgba(255,255,255,.05);color:#bfcde4}
+.resultitem b{color:#fff}.wide{grid-column:1/-1}
+.score-table{margin:20px 0;text-align:left}
+.score-row{display:flex;justify-content:space-between;padding:13px 15px;border-bottom:1px solid var(--line);color:#cbd8ec}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.actions .btn{min-width:200px}
+.final-intro{max-width:700px;margin:8vh auto;text-align:center;padding:42px}
+.final-intro h1{font-size:clamp(34px,7vw,60px)}
+.ready-title{font-size:clamp(25px,4vw,38px);font-weight:900;color:#d8c7ff}
+@media(max-width:650px){
+.app{width:94%;padding-top:15px}
+.welcome,.dashboard,.quiz,.center,.final-intro{padding:21px}
+.grid,.resultgrid,.level-grid{grid-template-columns:1fr}
+.field.full,.wide,.level-card.final{grid-column:auto}
+.question{font-size:22px}.option{padding:15px}
+}
+</style>
+
+</head><body>
+<div class="app"><!-- WELCOME --><section id="welcomeScreen" class="screen active">
+<div class="brand">
+<div class="logo">SPW</div>
+<h1>SUHAIL PRACTICE WEB</h1>
+<div class="subtitle">COST ACCOUNTING PRACTICE TEST</div>
+</div><div class="welcome glass">
+<div class="grid">
+<div class="field"><label>Student Name</label><input id="studentName" placeholder="Enter your full name"></div>
+<div class="field"><label>Roll Number</label><input id="rollNumber" placeholder="Enter roll number"></div>
+<div class="field"><label>Semester</label><input id="semester" placeholder="Example: 1st Semester"></div>
+<div class="field"><label>Degree / Course</label><input id="course" placeholder="Enter degree or course"></div>
+<div class="field full"><label>College Name</label><input id="college" placeholder="Enter college name"></div>
+</div><div class="info">
+<h3>Practice System</h3>
+<p>• 100 Important Unique Questions</p>
+<p>• 5 Main Levels</p>
+<p>• 20 Questions Per Level</p>
+<p>• Minimum 15 / 20 Required to Pass</p>
+<p>• 30 Random Revision Questions in Final Level</p>
+<p>• Complete all levels to unlock Final Revision</p>
+</div><button class="btn full" id="startBtn">START PRACTICE</button>
+
+<div id="welcomeError" class="error"></div>
+</div>
+</section><!-- DASHBOARD --><section id="dashboardScreen" class="screen">
+<div class="brand">
+<div class="logo">SPW</div>
+<h1>YOUR PRACTICE LEVELS</h1>
+<div class="subtitle">COST ACCOUNTING PRACTICE TEST</div>
+<p class="student-line" id="dashboardStudent"></p>
+</div><div class="dashboard glass">
+<div class="dashboard-head">
+<div class="badge">COMPLETE EACH LEVEL WITH AT LEAST 15 / 20</div>
+</div>
+<div class="level-grid" id="levelGrid"></div>
+</div>
+</section><!-- QUIZ --><section id="quizScreen" class="screen">
+<div class="brand">
+<div class="logo">SPW</div>
+<div class="subtitle">COST ACCOUNTING PRACTICE TEST</div>
+</div><div class="quiz glass">
+<div class="topline">
+<span id="levelText"></span>
+<span id="questionText"></span>
+<span id="totalText"></span>
+</div>
+<div class="pills">
+<span class="pill" id="scoreText"></span>
+<span class="pill" id="studentMini"></span>
+</div>
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+<h2 class="question" id="question"></h2>
+<div class="options" id="options"></div><div class="feedback" id="feedback">
+<div class="status" id="status"></div>
+<div class="correctline" id="correctLine"></div>
+<div class="explanation" id="explanation"></div>
+</div><div class="nextwrap" id="nextWrap">
+<button class="btn" id="nextBtn">NEXT QUESTION →</button>
+</div>
+</div>
+</section><!-- LEVEL RESULT --><section id="levelResultScreen" class="screen">
+<div class="center glass">
+<div class="badge" id="resultBadge"></div>
+<h1 id="resultHeading"></h1>
+<div class="bigscore" id="levelScore"></div>
+<div id="levelResultMessage"></div>
+<div class="actions" id="levelActions"></div>
+</div>
+</section><!-- FINAL INTRO --><section id="finalIntroScreen" class="screen">
+<div class="final-intro glass">
+<div class="logo">SPW</div>
+<div class="badge">FINAL REVISION LEVEL 🔥</div>
+<h1>AB TAK KYA SIKHA? 🧠</h1>
+<div class="ready-title">CHALO DEKHTE HAI! 🔥</div>
+<p class="small">You will now receive 30 randomly selected questions from the previous 5 levels.</p>
+<p class="small">Ready to test everything you have learned?</p>
+<button class="btn" id="readyBtn">I'M READY → 🚀</button>
+</div>
+</section><!-- FINAL RESULT --><section id="finalResultScreen" class="screen">
+<div class="center glass">
+<div class="logo">SPW</div>
+<h1>CONGRATULATIONS! 🎉🏆</h1>
+<p class="small" id="congratsText"></p><div class="resultgrid">
+<div class="resultitem">Student Name<br><b id="rName"></b></div>
+<div class="resultitem">Roll Number<br><b id="rRoll"></b></div>
+<div class="resultitem">Semester<br><b id="rSemester"></b></div>
+<div class="resultitem">Course<br><b id="rCourse"></b></div>
+<div class="resultitem wide">College<br><b id="rCollege"></b></div>
+</div><div class="score-table" id="finalScoreTable"></div>
+<div class="subtitle">OVERALL ATTEMPT SCORE</div>
+<div class="bigscore" id="finalScore"></div>
+<div id="finalMessage"></div><div class="actions">
+<button class="btn" id="practiceAgainBtn">PRACTICE AGAIN 🔄</button>
+<button class="btn secondary" id="editBtn">EDIT STUDENT DETAILS</button>
+</div>
+</div>
+</section></div><script>
+"use strict";
+
+/*
+100 UNIQUE COST ACCOUNTING QUESTIONS
+Q = [question, options, correct option index, explanation]
+*/
+
+const Q=(q,o,a,e)=>({q,o,a,e});
+
+const BASE_QUESTIONS=[
+
+Q("The primary purpose of Cost Accounting is to:",["Determine and control cost","Prepare only tax returns","Replace financial accounting","Calculate only profit"],0,"Cost Accounting helps ascertain, analyse and control the cost of products and services."),
+Q("A cost unit is:",["A place where cost is collected","A unit for which cost is measured","A type of overhead","A stock document"],1,"A cost unit is the unit of product or service for which cost is ascertained."),
+Q("A cost centre is:",["A product sold by a company","A location, person or item for which cost is accumulated","Only a profit centre","A finished goods store"],1,"Costs are collected for a location, department, person, machine or other identifiable unit."),
+Q("Which is an objective of Cost Accounting?",["Cost control","Increasing waste","Ignoring inefficiency","Preparing only balance sheets"],0,"Cost Accounting provides information for cost ascertainment and cost control."),
+Q("A major advantage of Cost Accounting is:",["It helps management control costs","It guarantees profit","It removes all expenses","It eliminates management decisions"],0,"Cost information helps management identify inefficient expenditure."),
+Q("A limitation of Cost Accounting is that:",["It may be costly to install","It needs no records","It is always exact","It removes human judgement"],0,"A detailed costing system may require trained staff and additional records."),
+Q("Direct material is material that:",["Cannot be traced to a product","Can be conveniently traced to a product","Is always indirect","Is never purchased"],1,"Direct material is specifically identifiable with a cost unit."),
+Q("Direct labour means labour:",["Used only in the office","Directly engaged in production","Paid only monthly","Always fixed"],1,"Direct labour is directly involved in producing the output."),
+Q("Direct expenses are:",["Expenses directly traceable to a product or job","Only administration expenses","Only fixed expenses","Only selling expenses"],0,"Direct expenses can be specifically identified with a cost unit."),
+Q("Indirect costs are commonly called:",["Prime cost","Overheads","Direct cost","Conversion output"],1,"Indirect material, labour and expenses are collectively called overheads."),
+Q("Prime Cost consists of:",["Direct Material + Direct Labour + Direct Expenses","Prime Cost + Factory Overhead","Works Cost + Selling Overhead","Direct Labour + Administration Overhead"],0,"Prime Cost includes all direct elements of cost."),
+Q("Factory or Works Cost is generally:",["Prime Cost + Factory Overhead","Prime Cost + Selling Overhead","Production Cost + Distribution Overhead","Material Cost only"],0,"Factory overhead is added to Prime Cost to obtain Works Cost."),
+Q("Cost of Production is generally:",["Works Cost + Administration Overhead","Prime Cost + Selling Overhead","Sales minus profit","Material + distribution overhead"],0,"Administration overhead related to production is added to Works Cost."),
+Q("Cost of Sales generally equals:",["Cost of Production + Selling and Distribution Overheads","Only Direct Material","Only Factory Overhead","Profit + Sales"],0,"Selling and distribution overheads are added to Cost of Production."),
+Q("Which is an example of Factory Overhead?",["Factory supervisor salary","Advertisement","Sales commission","Office rent"],0,"Factory supervision is an indirect production cost."),
+Q("Which is an Administration Overhead?",["Office rent","Machine depreciation","Delivery expense","Sales commission"],0,"Office rent is related to administration."),
+Q("Which is a Selling Overhead?",["Salesmen's salary","Factory power","Machine repair","Storekeeper salary"],0,"Salesmen's salary is incurred to promote and obtain sales."),
+Q("Which is a Distribution Overhead?",["Finished goods delivery expense","Direct wages","Factory lighting","Material purchase price"],0,"Distribution overhead relates to handling and delivery of finished goods."),
+Q("A fixed cost generally:",["Changes directly with output","Remains constant in total within the relevant range","Always becomes zero","Is always controllable"],1,"Total fixed cost normally remains unchanged within the relevant range."),
+Q("A variable cost generally:",["Changes in total with activity","Never changes","Is always indirect","Is unrelated to output"],0,"Total variable cost generally changes with output or activity."),
+
+Q("A semi-variable cost contains:",["Only fixed elements","Only variable elements","Both fixed and variable elements","No cost elements"],2,"Semi-variable cost has both fixed and variable portions."),
+Q("The main objective of material control is to:",["Ensure uninterrupted supply economically","Keep unlimited stock","Avoid all documentation","Eliminate purchasing"],0,"Material control balances availability, economy and stock protection."),
+Q("EOQ is the order quantity that:",["Maximizes sales","Minimizes relevant ordering and carrying costs","Always equals maximum stock","Eliminates lead time"],1,"EOQ is the economical order size."),
+Q("Re-order level indicates:",["The point at which a fresh order should be placed","The minimum selling price","Closing stock value","Profit level"],0,"An order is placed when stock reaches the re-order level."),
+Q("Minimum stock level is maintained mainly to:",["Avoid stock-out","Maximize stock","Determine profit","Replace a bin card"],0,"It protects against stock becoming too low."),
+Q("Maximum stock level helps prevent:",["Overstocking","All purchases","Material issues","Labour turnover"],0,"Maximum level prevents excessive investment and storage."),
+Q("Safety stock is:",["Extra stock held against uncertainty","Damaged stock","Stock sold at discount","Stock under inspection"],0,"Safety stock acts as a buffer against uncertainty."),
+Q("Danger level indicates:",["Critically low stock requiring urgent action","Maximum stock","Average stock value","Material profit"],0,"Danger level warns of urgent replenishment requirements."),
+Q("Perpetual inventory system means:",["Continuous stock recording","Counting only yearly","Using FIFO only","Continuous purchasing"],0,"Stock receipts, issues and balances are continuously recorded."),
+Q("A Bin Card is normally maintained by:",["Storekeeper","Sales manager","Customer","External auditor"],0,"The storekeeper records physical stock movements on the Bin Card."),
+Q("A Stores Ledger is generally maintained by:",["Costing/accounts department","Customer","Machine operator","Sales department"],0,"Stores Ledger records quantity and value information."),
+Q("FIFO means issues are valued from:",["Earliest available stock","Latest available stock","Only average stock","Selling price"],0,"First In, First Out assumes earliest inventory is issued first."),
+Q("LIFO means issues are valued from:",["Earliest available stock","Latest available stock","Average stock only","Selling price"],1,"Last In, First Out assumes latest inventory is issued first."),
+Q("Weighted Average Method uses:",["Oldest price","Latest price","Weighted average inventory cost","Selling price"],2,"Total cost of available inventory is divided by total quantity available."),
+Q("A Material Requisition Note authorizes:",["Issue of materials from stores","Payment of wages","Sale of finished goods","Depreciation calculation"],0,"It authorizes and records material issue."),
+Q("A Goods Received Note is prepared when:",["Materials are received and checked","Finished goods are sold","Wages are paid","A machine is repaired"],0,"It documents receipt and inspection of incoming materials."),
+Q("A Bill of Materials contains:",["Materials and quantities required for a product","Only labour rates","Only selling prices","Customer names"],0,"It lists required materials and quantities."),
+Q("Waste generally has:",["No or negligible recoverable value","High selling value","No production connection","Guaranteed reuse"],0,"Waste usually has little or no recovery value."),
+Q("Scrap is:",["Residual material with recoverable value","A finished product","A wage plan","A stock level"],0,"Scrap generally has some sale or recovery value."),
+Q("Spoilage means units that:",["Cannot economically be rectified","Are always normal output","Have no production cost","Are never inspected"],0,"Spoiled units cannot economically be restored."),
+
+Q("Defective units are units that:",["Can be economically rectified","Must always be discarded","Have no cost","Are never reworked"],0,"Defectives can be corrected through economically justified rework."),
+Q("Normal loss is:",["Expected loss under efficient conditions","Unexpected avoidable loss","Profit on production","Selling expense"],0,"Normal loss is expected and unavoidable under efficient operating conditions."),
+Q("Abnormal loss is:",["Loss beyond normal expectation","Expected process loss","Safety stock","Scrap sale"],0,"Abnormal loss is unusual and generally avoidable or unexpected."),
+Q("Time Rate System pays wages according to:",["Time spent","Units produced only","Sales value","Material value"],0,"Under time rate, wages depend mainly on time worked."),
+Q("Piece Rate System pays wages according to:",["Time spent only","Units produced","Office hours only","Material purchased"],1,"Under piece rate, wages depend on output produced."),
+Q("Halsey Plan is a:",["Time-saving incentive plan","Stock valuation method","Process costing method","Overhead allocation method"],0,"Halsey Plan rewards a worker with a share of time saved."),
+Q("Rowan Plan is a:",["Time-saving incentive plan","Material issue method","Stock level","Process loss method"],0,"Rowan Plan provides incentive based on time saved relative to time allowed."),
+Q("Idle time means:",["Time for which wages are paid but productive output is not obtained","Extra production time","Selling time","Machine purchase time"],0,"Idle time represents paid time without productive output."),
+Q("Labour turnover refers to:",["Movement of employees into and out of an organisation","Rotation of inventory","Sales turnover","Machine speed"],0,"Labour turnover measures changes in the workforce."),
+Q("Overhead allocation means:",["Charging an entire overhead item to one cost centre","Dividing overhead among several centres","Absorbing overhead into products","Selling overhead"],0,"Allocation assigns a whole overhead item to the relevant cost centre."),
+Q("Overhead apportionment means:",["Dividing common overhead among cost centres","Charging one full cost to one centre","Ignoring overhead","Calculating profit"],0,"Common overhead is shared among cost centres using an equitable basis."),
+Q("Overhead absorption means:",["Charging overhead to products or jobs","Buying overhead","Ignoring service departments","Paying direct wages"],0,"Absorption recovers overhead through cost units."),
+Q("Primary distribution refers to:",["Distribution of overhead among all departments","Distribution of direct material","Distribution of profit","Sales distribution"],0,"Primary distribution allocates/apportions overhead to production and service departments."),
+Q("Secondary distribution refers to:",["Redistribution of service department costs","Distribution of direct wages","Material issue","Sales distribution"],0,"Service department overhead is redistributed to production departments."),
+Q("A production department:",["Directly contributes to production","Provides only support services","Sells shares","Maintains only accounts"],0,"Production departments directly participate in manufacturing."),
+Q("A service department:",["Supports production departments","Produces finished goods directly only","Sells products","Records only profit"],0,"Service departments provide support services."),
+Q("Machine Hour Rate is suitable when overhead is mainly related to:",["Machine operation","Direct selling","Office administration","Material purchase only"],0,"Machine-related overhead can be absorbed based on machine hours."),
+Q("Labour Hour Rate is suitable when overhead is closely related to:",["Direct labour hours","Material price","Sales volume","Number of customers"],0,"Labour-intensive production often uses labour hours for absorption."),
+Q("Under-absorption of overhead occurs when:",["Actual overhead exceeds absorbed overhead","Absorbed overhead exceeds actual overhead","Actual overhead is zero","Sales exceed cost"],0,"Too little overhead has been recovered."),
+Q("Over-absorption of overhead occurs when:",["Absorbed overhead exceeds actual overhead","Actual overhead exceeds absorbed overhead","No overhead exists","Materials exceed wages"],0,"Too much overhead has been recovered."),
+
+Q("A cost sheet is prepared mainly to:",["Show detailed cost of a product","Prepare a bank statement","Calculate income tax only","Record stock quantities only"],0,"A cost sheet presents cost elements and total cost."),
+Q("Job costing is suitable when:",["Each job is distinct","Products are continuously identical","Only services exist","Stock is valued by FIFO"],0,"Separate jobs are costed individually."),
+Q("Batch costing is suitable when:",["Similar items are produced in batches","Every output is entirely unique","Only one unit is produced","No production exists"],0,"A batch is treated as a cost unit."),
+Q("Contract costing is generally used for:",["Large site-based projects","Continuous chemical production","Small retail sales","Material stores"],0,"Construction and similar large contracts use contract costing."),
+Q("Process costing is suitable for:",["Continuous mass production","Unique jobs only","Individual contracts only","Retail quotations"],0,"Process costing is used where output passes through continuous processes."),
+Q("Operating costing is commonly used for:",["Transport and service operations","Only building construction","Only stock valuation","Only taxation"],0,"Operating costing is useful for transport and service organisations."),
+Q("Tender or quotation costing is used to:",["Estimate cost for a proposed job","Value closing stock","Calculate labour turnover","Prepare a bank reconciliation"],0,"It helps prepare quotations and tenders."),
+Q("Reconciliation of Cost and Financial Accounts is prepared to:",["Explain differences between two profit figures","Calculate EOQ","Record stock physically","Allocate overhead"],0,"Different accounting treatments can create different profit figures."),
+Q("Integrated accounting means:",["One combined system for cost and financial accounts","Two unrelated systems only","No financial accounting","Only tax accounting"],0,"Integrated accounting combines cost and financial accounting records."),
+Q("Cost control focuses mainly on:",["Keeping costs within predetermined limits","Reducing every cost without analysis","Ignoring standards","Increasing waste"],0,"Cost control compares actual cost with standards or budgets."),
+Q("Cost reduction aims at:",["Permanent reduction in unit cost without reducing quality","Temporary cost increase","Increasing waste","Avoiding measurement"],0,"Cost reduction seeks genuine and lasting economy."),
+Q("A sunk cost is:",["A past cost that cannot be recovered","A future avoidable cost","A direct material cost only","A stock level"],0,"Sunk costs are already incurred and generally irrelevant to future alternatives."),
+Q("Opportunity cost is:",["Benefit sacrificed by choosing one alternative over another","Historical cost only","Factory overhead","Abnormal loss"],0,"It represents the benefit forgone from the next best alternative."),
+Q("A controllable cost is a cost:",["Influenced by a particular manager within authority","Never controlled by anyone","Always fixed","Always direct"],0,"Control depends on the responsibility and authority assigned."),
+Q("An uncontrollable cost is:",["Not significantly influenced by a manager at that level","Never incurred","Always variable","Always avoidable"],0,"Control can depend on the managerial level being considered."),
+Q("Conversion cost consists of:",["Direct Labour + Factory Overhead","Direct Material + Selling Overhead","Administration + Selling Overhead","Direct Expenses only"],0,"Conversion cost represents the cost of converting materials into finished goods."),
+
+Q("Direct Material ₹40,000, Direct Labour ₹45,000 and Direct Expenses ₹5,000. Prime Cost is:",["₹85,000","₹90,000","₹95,000","₹80,000"],1,"Formula: Prime Cost = Direct Material + Direct Labour + Direct Expenses\n₹40,000 + ₹45,000 + ₹5,000 = ₹90,000."),
+Q("Prime Cost is ₹80,000 and Factory Overhead is ₹20,000. Works Cost is:",["₹60,000","₹80,000","₹100,000","₹120,000"],2,"Works Cost = Prime Cost + Factory Overhead\n₹80,000 + ₹20,000 = ₹100,000."),
+Q("Works Cost is ₹1,20,000 and Administration Overhead is ₹15,000. Cost of Production is:",["₹1,05,000","₹1,20,000","₹1,35,000","₹1,50,000"],2,"Cost of Production = Works Cost + Administration Overhead\n₹1,20,000 + ₹15,000 = ₹1,35,000."),
+Q("Cost of Production ₹2,00,000 and Selling & Distribution Overhead ₹30,000. Cost of Sales is:",["₹1,70,000","₹2,00,000","₹2,30,000","₹2,60,000"],2,"Cost of Sales = Cost of Production + Selling & Distribution Overhead\n₹2,00,000 + ₹30,000 = ₹2,30,000."),
+Q("Direct Material ₹50,000 and Direct Labour ₹30,000. Direct Expenses are ₹10,000. Prime Cost is:",["₹70,000","₹80,000","₹90,000","₹1,00,000"],2,"Prime Cost = ₹50,000 + ₹30,000 + ₹10,000 = ₹90,000."),
+Q("Prime Cost ₹90,000, Factory Overhead ₹25,000 and Administration Overhead ₹10,000. Cost of Production is:",["₹1,00,000","₹1,15,000","₹1,25,000","₹1,35,000"],2,"Works Cost = ₹90,000 + ₹25,000 = ₹1,15,000.\nCost of Production = ₹1,15,000 + ₹10,000 = ₹1,25,000."),
+Q("Cost of Production is ₹1,50,000. Selling Overhead ₹20,000 and Distribution Overhead ₹10,000. Cost of Sales is:",["₹1,60,000","₹1,70,000","₹1,80,000","₹1,90,000"],2,"Cost of Sales = ₹1,50,000 + ₹20,000 + ₹10,000 = ₹1,80,000."),
+Q("Opening material stock ₹10,000, Purchases ₹60,000 and Closing material stock ₹15,000. Material Consumed is:",["₹45,000","₹55,000","₹65,000","₹75,000"],1,"Material Consumed = Opening Stock + Purchases − Closing Stock\n₹10,000 + ₹60,000 − ₹15,000 = ₹55,000."),
+Q("Opening stock 100 units @ ₹10 and purchases 100 units @ ₹14. Weighted Average Price is:",["₹10","₹11","₹12","₹14"],2,"Weighted Average Price = Total Cost / Total Quantity\n(₹1,000 + ₹1,400) / 200 = ₹12."),
+Q("Demand is 10,000 units, ordering cost ₹100 per order and carrying cost ₹4 per unit. EOQ is:",["500 units","707 units","1,000 units","2,000 units"],1,"EOQ = √(2DS/H)\n= √(2 × 10,000 × 100 / 4)\n= √500,000 ≈ 707 units."),
+Q("Maximum usage is 100 units per day and maximum lead time is 10 days. Re-order Level is:",["500 units","800 units","1,000 units","1,500 units"],2,"Re-order Level = Maximum Usage × Maximum Lead Time\n100 × 10 = 1,000 units."),
+Q("Average usage is 80 units per day and average lead time is 5 days. Average stock requirement during lead time is:",["160 units","240 units","400 units","800 units"],2,"Average usage during lead time = 80 × 5 = 400 units."),
+Q("Maximum usage 120 units/day and minimum lead time 4 days. Minimum consumption during minimum lead time is:",["240 units","360 units","480 units","600 units"],2,"Minimum consumption = 120 × 4 = 480 units."),
+Q("A machine operates 2,000 hours. Department overhead is ₹1,00,000. Machine Hour Rate is:",["₹25/hour","₹40/hour","₹50/hour","₹100/hour"],2,"Machine Hour Rate = Overhead / Machine Hours\n₹1,00,000 / 2,000 = ₹50 per hour."),
+Q("Factory overhead ₹90,000 and labour hours 6,000. Labour Hour Rate is:",["₹10/hour","₹15/hour","₹20/hour","₹25/hour"],1,"Labour Hour Rate = ₹90,000 / 6,000 = ₹15 per labour hour."),
+Q("Actual factory overhead is ₹1,20,000 and absorbed overhead is ₹1,10,000. The amount of under-absorption is:",["₹5,000","₹10,000","₹20,000","₹2,30,000"],1,"Under-absorption = Actual Overhead − Absorbed Overhead\n₹1,20,000 − ₹1,10,000 = ₹10,000."),
+Q("Actual overhead is ₹80,000 while absorbed overhead is ₹90,000. Over-absorption is:",["₹5,000","₹10,000","₹80,000","₹90,000"],1,"Over-absorption = Absorbed Overhead − Actual Overhead\n₹90,000 − ₹80,000 = ₹10,000."),
+Q("Direct material ₹30 per unit, direct labour ₹20 per unit and direct expenses ₹5 per unit. Prime Cost per unit is:",["₹45","₹50","₹55","₹60"],2,"Prime Cost per unit = ₹30 + ₹20 + ₹5 = ₹55."),
+Q("Prime Cost per unit ₹55 and Factory Overhead ₹15 per unit. Works Cost per unit is:",["₹40","₹55","₹60","₹70"],3,"Works Cost = Prime Cost + Factory Overhead\n₹55 + ₹15 = ₹70."),
+Q("Works Cost ₹70 per unit and Administration Overhead ₹8 per unit. Cost of Production per unit is:",["₹62","₹70","₹78","₹80"],2,"Cost of Production = ₹70 + ₹8 = ₹78 per unit."),
+Q("Cost of Production ₹78 per unit, Selling Overhead ₹7 and Distribution Overhead ₹5. Cost of Sales per unit is:",["₹80","₹85","₹90","₹95"],2,"Cost of Sales = ₹78 + ₹7 + ₹5 = ₹90 per unit."),
+Q("A worker produces 200 units at ₹8 per unit under piece rate. Wages are:",["₹800","₹1,200","₹1,600","₹2,000"],2,"Piece Rate Wages = Units × Rate per Unit\n200 × ₹8 = ₹1,600."),
+Q("A worker works 8 hours at ₹150 per hour under time rate. Wages are:",["₹1,000","₹1,200","₹1,500","₹1,800"],1,"Time Rate Wages = Hours × Hourly Rate\n8 × ₹150 = ₹1,200."),
+Q("Standard time 10 hours, actual time 8 hours, hourly rate ₹100. Under a 50% Halsey plan, total earnings are:",["₹800","₹900","₹1,000","₹1,200"],1,"Time saved = 10 − 8 = 2 hours.\nEarnings = 8×₹100 + 50%×2×₹100 = ₹800 + ₹100 = ₹900."),
+Q("Materials purchased are ₹50,000. Freight inward ₹5,000 and purchase returns ₹3,000. Net material purchase cost is:",["₹42,000","₹48,000","₹52,000","₹55,000"],2,"Net Material Cost = Purchases + Freight Inward − Returns\n₹50,000 + ₹5,000 − ₹3,000 = ₹52,000."),
+Q("Opening stock ₹20,000, purchases ₹1,00,000 and closing stock ₹25,000. Material consumed is:",["₹85,000","₹95,000","₹1,05,000","₹1,20,000"],1,"Material Consumed = ₹20,000 + ₹1,00,000 − ₹25,000 = ₹95,000."),
+Q("Total cost of 300 units is ₹18,000. Cost per unit is:",["₹50","₹60","₹70","₹80"],1,"Cost per unit = ₹18,000 / 300 = ₹60."),
+Q("Factory overhead ₹60,000 is absorbed over 3,000 machine hours. For a job requiring 20 machine hours, absorbed overhead is:",["₹200","₹300","₹400","₹600"],2,"Machine Hour Rate = ₹60,000 / 3,000 = ₹20.\nJob overhead = 20 × ₹20 = ₹400."),
+Q("Labour Hour Rate is ₹25. A job uses 12 labour hours. Overhead absorbed is:",["₹250","₹275","₹300","₹350"],2,"Overhead = Labour Hour Rate × Labour Hours\n₹25 × 12 = ₹300."),
+Q("A batch contains 500 units and total batch cost is ₹75,000. Cost per unit is:",["₹100","₹125","₹150","₹175"],2,"Cost per unit = ₹75,000 / 500 = ₹150."),
+Q("Prime Cost is ₹2,40,000 and Factory Overhead is 25% of Prime Cost. Works Cost is:",["₹2,70,000","₹2,90,000","₹3,00,000","₹3,60,000"],2,"Factory Overhead = 25% of ₹2,40,000 = ₹60,000.\nWorks Cost = ₹2,40,000 + ₹60,000 = ₹3,00,000."),
+Q("Works Cost is ₹3,00,000 and Administration Overhead is 10% of Works Cost. Cost of Production is:",["₹3,10,000","₹3,20,000","₹3,30,000","₹3,60,000"],2,"Administration Overhead = 10% × ₹3,00,000 = ₹30,000.\nCost of Production = ₹3,30,000."),
+Q("Cost of Production ₹3,30,000. Selling & Distribution Overhead is 5% of Cost of Production. Cost of Sales is:",["₹3,35,000","₹3,40,000","₹3,46,500","₹3,60,000"],2,"Overhead = 5% × ₹3,30,000 = ₹16,500.\nCost of Sales = ₹3,46,500."),
+Q("Stock available is 1,000 units costing ₹20,000. Weighted average cost per unit is:",["₹10","₹15","₹20","₹25"],2,"Average Cost = ₹20,000 / 1,000 = ₹20 per unit."),
+Q("Opening stock 50 units @ ₹10 and purchase 100 units @ ₹15. Weighted average price is:",["₹12","₹13.33","₹14","₹15"],1,"Total cost = ₹500 + ₹1,500 = ₹2,000.\nTotal units = 150.\nAverage = ₹2,000/150 = ₹13.33."),
+Q("Annual demand is 20,000 units. EOQ is 1,000 units. Approximate number of orders per year is:",["10","20","25","40"],1,"Number of orders = Annual Demand / EOQ\n20,000 / 1,000 = 20."),
+Q("Maximum stock level is 5,000 units and current stock is 3,200 units. Additional space before maximum level is:",["1,000 units","1,500 units","1,800 units","2,200 units"],2,"Available space = 5,000 − 3,200 = 1,800 units."),
+Q("A factory has 4,000 available labour hours and overhead ₹1,20,000. Labour Hour Rate is:",["₹20","₹25","₹30","₹35"],2,"Labour Hour Rate = ₹1,20,000 / 4,000 = ₹30 per hour."),
+Q("A machine department has overhead ₹2,00,000 and 5,000 machine hours. A job uses 30 machine hours. Overhead absorbed is:",["₹900","₹1,000","₹1,200","₹1,500"],2,"Machine Hour Rate = ₹2,00,000 / 5,000 = ₹40.\nAbsorbed overhead = 30 × ₹40 = ₹1,200.")
+];
+
+if(BASE_QUESTIONS.length!==100){
+throw new Error("Question bank must contain exactly 100 questions.");
+}
+
+let student={};
+let levelScores=[null,null,null,null,null];
+let unlockedLevel=1;
+let activeQuestions=[];
+let activeLevel=1;
+let currentIndex=0;
+let currentScore=0;
+let finalRevisionScore=0;
+let isFinalRevision=false;
+let answered=false;
+
+const $=id=>document.getElementById(id);
+
+function showScreen(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+$(id).classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function shuffle(arr){
+const copy=[...arr];
+for(let i=copy.length-1;i>0;i--){
+const j=Math.floor(Math.random()*(i+1));
+[copy[i],copy[j]]=[copy[j],copy[i]];
+}
+return copy;
+}
+
+function startPractice(){
+const name=$("studentName").value.trim();
+const roll=$("rollNumber").value.trim();
+const semester=$("semester").value.trim();
+const course=$("course").value.trim();
+const college=$("college").value.trim();
+
+if(!name||!roll||!semester||!course||!college){
+$("welcomeError").textContent="Please fill in all student details before starting.";
+return;
+}
+
+student={name,roll,semester,course,college};
+$("welcomeError").textContent="";
+renderDashboard();
+showScreen("dashboardScreen");
+}
+
+function renderDashboard(){
+$("dashboardStudent").textContent="Student: "+student.name;
+const grid=$("levelGrid");
+grid.innerHTML="";
+
+for(let i=1;i<=5;i++){
+const passed=levelScores[i-1]!==null && levelScores[i-1]>=15;
+const unlocked=i<=unlockedLevel;
+const card=document.createElement("div");
+card.className="level-card "+(!unlocked?"locked":"");
+
+let status=passed
+?"✓ PASSED • "+levelScores[i-1]+"/20"
+:unlocked
+?"● UNLOCKED"
+:"🔒 LOCKED";
+
+card.innerHTML=`
+<div class="level-status ${passed?"passed":"unlocked"}">${status}</div>
+<h3>LEVEL ${i}</h3>
+<p>20 important Cost Accounting questions. Score at least 15 marks to pass.</p>
+<button class="btn" ${unlocked?"":"disabled"}>${passed?"RETRY LEVEL "+i:"START LEVEL "+i}</button>
+`;
+
+const btn=card.querySelector("button");
+if(unlocked)btn.addEventListener("click",()=>startLevel(i));
+grid.appendChild(card);
+}
+
+const finalUnlocked=unlockedLevel>=6;
+const final=document.createElement("div");
+final.className="level-card final "+(!finalUnlocked?"locked":"");
+final.innerHTML=`
+<div class="level-status ${finalUnlocked?"unlocked":"locked"}">
+${finalUnlocked?"🔥 UNLOCKED":"🔒 COMPLETE ALL 5 LEVELS"}
+</div>
+<h3>FINAL REVISION LEVEL 🔥</h3>
+<p>AB TAK KYA SIKHA? CHALO DEKHTE HAI! 30 randomly selected revision questions from all previous levels.</p>
+<button class="btn" ${finalUnlocked?"":"disabled"}>ENTER FINAL LEVEL →</button>
+`;
+const finalBtn=final.querySelector("button");
+if(finalUnlocked)finalBtn.addEventListener("click",()=>showScreen("finalIntroScreen"));
+grid.appendChild(final);
+}
+
+function startLevel(level){
+activeLevel=level;
+isFinalRevision=false;
+activeQuestions=shuffle(BASE_QUESTIONS.slice((level-1)*20,level*20));
+currentIndex=0;
+currentScore=0;
+showScreen("quizScreen");
+loadQuestion();
+}
+
+function startFinalRevision(){
+activeLevel=6;
+isFinalRevision=true;
+activeQuestions=shuffle(BASE_QUESTIONS).slice(0,30);
+currentIndex=0;
+currentScore=0;
+showScreen("quizScreen");
+loadQuestion();
+}
+
+function loadQuestion(){
+answered=false;
+const q=activeQuestions[currentIndex];
+const total=activeQuestions.length;
+
+$("levelText").textContent=isFinalRevision?"FINAL REVISION":"LEVEL "+activeLevel+" / 5";
+$("questionText").textContent="Question "+(currentIndex+1)+" / "+total;
+$("totalText").textContent="Score: "+currentScore+" / "+total;
+$("scoreText").textContent="CURRENT SCORE: "+currentScore;
+$("studentMini").textContent=student.name;
+$("progressBar").style.width=(currentIndex/total*100)+"%";
+$("question").textContent=q.q;
+
+const options=$("options");
+options.innerHTML="";
+$("feedback").classList.remove("show");
+$("nextWrap").classList.remove("show");
+
+q.o.forEach((option,index)=>{
+const btn=document.createElement("button");
+btn.className="option";
+btn.innerHTML="<b>"+String.fromCharCode(65+index)+".</b> "+option;
+btn.addEventListener("click",()=>selectAnswer(index));
+options.appendChild(btn);
+});
+}
+
+function selectAnswer(selected){
+if(answered)return;
+answered=true;
+
+const q=activeQuestions[currentIndex];
+const buttons=[...$("options").querySelectorAll(".option")];
+buttons.forEach(b=>b.disabled=true);
+
+const correct=selected===q.a;
+
+if(correct){
+buttons[selected].classList.add("correct");
+currentScore++;
+$("status").textContent="Correct! ✅";
+$("correctLine").textContent="";
+}else{
+buttons[selected].classList.add("wrong");
+buttons[q.a].classList.add("correct");
+$("status").textContent="Wrong Answer ❌";
+$("correctLine").textContent="Correct Answer: "+q.o[q.a];
+}
+
+$("explanation").textContent=q.e;
+$("feedback").classList.add("show");
+$("nextWrap").classList.add("show");
+$("totalText").textContent="Score: "+currentScore+" / "+activeQuestions.length;
+$("scoreText").textContent="CURRENT SCORE: "+currentScore;
+$("progressBar").style.width=((currentIndex+1)/activeQuestions.length*100)+"%";
+$("nextBtn").textContent=currentIndex===activeQuestions.length-1
+?(isFinalRevision?"VIEW FINAL RESULT 🏆":"VIEW LEVEL RESULT →")
+:"NEXT QUESTION →";
+}
+
+function nextQuestion(){
+if(!answered)return;
+if(currentIndex<activeQuestions.length-1){
+currentIndex++;
+loadQuestion();
+}else{
+if(isFinalRevision){
+finalRevisionScore=currentScore;
+showFinalResult();
+}else{
+showLevelResult();
+}
+}
+}
+
+function showLevelResult(){
+const passed=currentScore>=15;
+const level=activeLevel;
+
+if(passed){
+levelScores[level-1]=currentScore;
+if(unlockedLevel===level)unlockedLevel=level+1;
+
+$("resultBadge").textContent="LEVEL "+level+" COMPLETED";
+$("resultHeading").textContent="LEVEL "+level+" PASSED! 🎉";
+$("levelScore").textContent=currentScore+" / 20";
+$("levelResultMessage").innerHTML=`
+<div class="passbox">
+Congratulations, ${student.name}! 🎉<br>
+You passed Level ${level} with ${currentScore} marks.<br>
+${level<5?"The next level has been unlocked! 🔓":"You completed all 5 levels! The Final Revision Level is now unlocked! 🔥"}
+</div>`;
+
+$("levelActions").innerHTML="";
+const btn=document.createElement("button");
+btn.className="btn";
+btn.textContent=level<5?"START LEVEL "+(level+1)+" →":"GO TO FINAL REVISION 🔥";
+btn.onclick=()=>{
+renderDashboard();
+if(level<5)startLevel(level+1);
+else showScreen("finalIntroScreen");
+};
+$("levelActions").appendChild(btn);
+
+}else{
+$("resultBadge").textContent="LEVEL "+level+" RESULT";
+$("resultHeading").textContent="FAILED ❌";
+$("levelScore").textContent=currentScore+" / 20";
+$("levelResultMessage").innerHTML=`
+<div class="failbox">
+You need at least <b>15 marks</b> to pass this level.<br>
+You scored <b>${currentScore} / 20</b>.<br>
+Keep practicing and try again! 💪
+</div>`;
+
+$("levelActions").innerHTML="";
+const retry=document.createElement("button");
+retry.className="btn";
+retry.textContent="RETRY LEVEL "+level+" 🔄";
+retry.onclick=()=>startLevel(level);
+
+const back=document.createElement("button");
+back.className="btn secondary";
+back.textContent="BACK TO LEVELS";
+back.onclick=()=>{
+renderDashboard();
+showScreen("dashboardScreen");
+};
+
+$("levelActions").append(retry,back);
+}
+
+showScreen("levelResultScreen");
+}
+
+function showFinalResult(){
+$("rName").textContent=student.name;
+$("rRoll").textContent=student.roll;
+$("rSemester").textContent=student.semester;
+$("rCourse").textContent=student.course;
+$("rCollege").textContent=student.college;
+
+$("congratsText").textContent=
+student.name+", you successfully completed all 5 Cost Accounting Practice Levels and the Final Revision Challenge! 🔥";
+
+const table=$("finalScoreTable");
+table.innerHTML="";
+let total=finalRevisionScore;
+for(let i=0;i<5;i++){
+total+=levelScores[i];
+table.innerHTML+=`<div class="score-row"><span>LEVEL ${i+1}</span><b>${levelScores[i]} / 20</b></div>`;
+}
+table.innerHTML+=`<div class="score-row"><span>FINAL REVISION 🔥</span><b>${finalRevisionScore} / 30</b></div>`;
+
+$("finalScore").textContent=total+" / 130";
+
+let message="";
+if(total>=110){
+message=`<div class="top3">Outstanding, ${student.name}! 🏆🔥<br>You completed every level with an excellent overall performance!</div>`;
+}else if(total>=90){
+message=`<div class="passbox">Excellent Performance! 🌟<br>Congratulations on completing the full practice journey.</div>`;
+}else{
+message=`<div class="passbox">Congratulations! 🎉<br>You completed all levels and the Final Revision Challenge. Keep practicing to become even stronger! 💪</div>`;
+}
+$("finalMessage").innerHTML=message;
+showScreen("finalResultScreen");
+}
+
+function restartPractice(){
+levelScores=[null,null,null,null,null];
+unlockedLevel=1;
+finalRevisionScore=0;
+renderDashboard();
+showScreen("dashboardScreen");
+}
+
+function editStudentDetails(){
+$("studentName").value=student.name||"";
+$("rollNumber").value=student.roll||"";
+$("semester").value=student.semester||"";
+$("course").value=student.course||"";
+$("college").value=student.college||"";
+showScreen("welcomeScreen");
+}
+
+$("startBtn").addEventListener("click",startPractice);
+$("nextBtn").addEventListener("click",nextQuestion);
+$("readyBtn").addEventListener("click",startFinalRevision);
+$("practiceAgainBtn").addEventListener("click",restartPractice);
+$("editBtn").addEventListener("click",editStudentDetails);
+
+</script></body>
+</html>
