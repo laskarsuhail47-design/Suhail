@@ -1,529 +1,890 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Happy Birthday Afrin ❤️</title>
-
-  <style>
+  <title>SUHAIL PRACTICE WEB | Cost Accounting</title>  <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    :root {
+      --bg: #07111f;
+      --card: rgba(17, 30, 49, 0.92);
+      --card-light: #13243b;
+      --accent: #4f9cff;
+      --accent-2: #7c5cff;
+      --success: #1fbe72;
+      --danger: #ef5350;
+      --text: #f4f8ff;
+      --muted: #9fb0c8;
+      --border: rgba(255,255,255,0.09);
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
-      background: linear-gradient(135deg, #1a1025, #3b183d, #1c1026);
-      color: white;
+      background:
+        radial-gradient(circle at top left, rgba(79,156,255,0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(124,92,255,0.16), transparent 28%),
+        var(--bg);
+      color: var(--text);
     }
 
-    .page {
-      display: none;
-      min-height: 100vh;
+    /* ================= HEADER ================= */
+
+    .header {
       width: 100%;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-      position: relative;
-    }
-
-    .page.active {
-      display: flex;
-    }
-
-    /* ---------- PAGE 1 ---------- */
-
-    #welcomePage {
-      flex-direction: column;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .birthday-title {
-      font-size: clamp(3rem, 10vw, 7rem);
-      font-weight: bold;
-      background: linear-gradient(90deg, #ffb6d9, #ffffff, #ff83bd);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glow 1.5s infinite alternate, float 2s ease-in-out infinite;
-      text-shadow: 0 0 40px rgba(255, 150, 210, 0.5);
-    }
-
-    .birthday-name {
-      margin-top: 15px;
-      font-size: clamp(1.5rem, 5vw, 3rem);
-      color: #ffd2e6;
-      animation: fadeIn 2s ease;
-    }
-
-    .click-here {
-      margin-top: 50px;
-      padding: 16px 45px;
-      border: none;
-      border-radius: 50px;
-      background: linear-gradient(135deg, #ff4f92, #b43cff);
-      color: white;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 30px rgba(255, 79, 146, 0.6);
-      opacity: 0;
-      transform: translateY(20px);
-      transition: 0.3s;
-      animation: buttonAppear 0.8s forwards;
-      animation-delay: 3s;
-    }
-
-    .click-here:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 45px rgba(255, 79, 146, 0.9);
-    }
-
-    /* ---------- PAGE 2 ---------- */
-
-    #messagePage {
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .message-container {
-      width: 100%;
+      padding: 18px 6%;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 50px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7,17,31,0.82);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .message-box {
-      flex: 1;
-      min-width: 280px;
-      max-width: 520px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 25px;
-      padding: 35px;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-      animation: slideLeft 1s ease;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .message-box h1 {
-      margin-bottom: 25px;
-      color: #ffb6d9;
-      font-size: 2.3rem;
-    }
-
-    .message-box p {
-      font-size: 1.08rem;
-      line-height: 1.9;
-      color: #f5eaf2;
-    }
-
-    .photo-section {
-      flex: 1;
-      min-width: 280px;
-      max-width: 400px;
-      text-align: center;
-      animation: slideRight 1s ease;
-    }
-
-    .photo-frame {
-      padding: 10px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, #ff6ea8, #a855f7, #ff9dc6);
-      box-shadow: 0 0 40px rgba(255, 100, 180, 0.35);
-    }
-
-    .photo-frame img {
-      width: 100%;
-      display: block;
-      border-radius: 22px;
-      max-height: 500px;
-      object-fit: cover;
-    }
-
-    .click-me {
-      margin-top: 25px;
-      padding: 14px 38px;
-      border: none;
-      border-radius: 50px;
-      background: white;
-      color: #8d2b68;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .click-me:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 30px rgba(255,255,255,0.5);
-    }
-
-    /* ---------- PAGE 3 ---------- */
-
-    #finalPage {
-      flex-direction: column;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .final-card {
-      max-width: 750px;
-      padding: 50px 35px;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(15px);
-      border-radius: 30px;
-      border: 1px solid rgba(255,255,255,0.15);
-      animation: finalAppear 1.2s ease;
-      box-shadow: 0 0 60px rgba(255, 90, 170, 0.2);
-    }
-
-    .heart {
-      font-size: 4rem;
-      animation: heartbeat 1.3s infinite;
-      margin-bottom: 20px;
-    }
-
-    .final-card h1 {
-      color: #ffb6d9;
-      margin-bottom: 30px;
-      font-size: clamp(2rem, 5vw, 3rem);
-    }
-
-    .final-card p {
-      font-size: 1.2rem;
-      line-height: 2;
-      color: #f5eaf2;
-    }
-
-    .signature {
-      margin-top: 30px;
-      font-size: 1.1rem;
-      color: #ffc4dd;
-      font-style: italic;
-    }
-
-    /* ---------- BACKGROUND PARTICLES ---------- */
-
-    .particle {
-      position: fixed;
+    .brand-logo {
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
-      pointer-events: none;
-      animation: rise linear infinite;
-      opacity: 0.7;
-      z-index: -1;
+      overflow: hidden;
+      border: 2px solid rgba(79,156,255,0.7);
+      box-shadow: 0 0 25px rgba(79,156,255,0.25);
+      background: #101d31;
+      flex-shrink: 0;
     }
 
-    /* ---------- ANIMATIONS ---------- */
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-    @keyframes glow {
+    .brand-text h1 {
+      font-size: 1.15rem;
+      letter-spacing: 1.4px;
+    }
+
+    .brand-text p {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 3px;
+    }
+
+    .exam-tag {
+      padding: 10px 16px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      background: rgba(79,156,255,0.12);
+      border: 1px solid rgba(79,156,255,0.28);
+      color: #b8d7ff;
+    }
+
+    /* ================= MAIN ================= */
+
+    .main {
+      width: min(1050px, 92%);
+      margin: 0 auto;
+      padding: 55px 0;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeUp 0.5s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    /* ================= WELCOME ================= */
+
+    .hero {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      color: #b8d7ff;
+      background: rgba(79,156,255,0.1);
+      border: 1px solid rgba(79,156,255,0.22);
+      padding: 9px 16px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero h2 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+      margin: auto;
+      line-height: 1.7;
+    }
+
+    /* ================= DETAILS CARD ================= */
+
+    .details-card {
+      max-width: 850px;
+      margin: auto;
+      padding: 34px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    }
+
+    .section-title {
+      margin-bottom: 26px;
+    }
+
+    .section-title h3 {
+      font-size: 1.4rem;
+      margin-bottom: 7px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      color: #cdd9eb;
+      font-size: 0.86rem;
+      font-weight: bold;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      outline: none;
+      background: #0d1b2d;
+      color: white;
+      font-size: 0.95rem;
+      transition: 0.25s;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79,156,255,0.12);
+    }
+
+    .field option {
+      background: #0d1b2d;
+    }
+
+    .start-btn,
+    .next-btn,
+    .restart-btn {
+      border: none;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      transition: 0.25s;
+    }
+
+    .start-btn {
+      width: 100%;
+      margin-top: 28px;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 1rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 30px rgba(79,156,255,0.2);
+    }
+
+    .start-btn:hover,
+    .next-btn:hover,
+    .restart-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    /* ================= QUIZ ================= */
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      gap: 15px;
+    }
+
+    .candidate {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .candidate-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .candidate-info h3 {
+      font-size: 0.98rem;
+    }
+
+    .candidate-info p {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 3px;
+    }
+
+    .score-box {
+      padding: 10px 16px;
+      background: rgba(31,190,114,0.1);
+      border: 1px solid rgba(31,190,114,0.25);
+      color: #8ff0bd;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    .progress-wrap {
+      height: 9px;
+      background: #102137;
+      border-radius: 30px;
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 30px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 0.4s ease;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 35px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.2);
+    }
+
+    .question-number {
+      color: #8bbcff;
+      font-size: 0.84rem;
+      font-weight: bold;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+
+    .question {
+      font-size: clamp(1.25rem, 3vw, 1.65rem);
+      line-height: 1.45;
+      margin-bottom: 28px;
+    }
+
+    .options {
+      display: grid;
+      gap: 13px;
+    }
+
+    .option {
+      width: 100%;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      text-align: left;
+      border-radius: 14px;
+      background: #0d1b2d;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.96rem;
+    }
+
+    .option:hover:not(:disabled) {
+      border-color: rgba(79,156,255,0.7);
+      transform: translateX(3px);
+    }
+
+    .option-letter {
+      min-width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: #172a43;
+      color: #b7d5ff;
+      font-weight: bold;
+      font-size: 0.82rem;
+    }
+
+    .option.correct {
+      background: rgba(31,190,114,0.14);
+      border-color: var(--success);
+    }
+
+    .option.wrong {
+      background: rgba(239,83,80,0.14);
+      border-color: var(--danger);
+    }
+
+    .option:disabled {
+      cursor: default;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 22px;
+      padding: 17px;
+      border-radius: 14px;
+      line-height: 1.6;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct-feedback {
+      background: rgba(31,190,114,0.12);
+      border: 1px solid rgba(31,190,114,0.3);
+      color: #baf7d4;
+    }
+
+    .feedback.wrong-feedback {
+      background: rgba(239,83,80,0.11);
+      border: 1px solid rgba(239,83,80,0.3);
+      color: #ffd0cf;
+    }
+
+    .next-btn {
+      display: none;
+      margin-top: 22px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 13px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-size: 0.98rem;
+    }
+
+    /* ================= RESULT ================= */
+
+    .result-card {
+      max-width: 760px;
+      margin: auto;
+      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 50px 30px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+    }
+
+    .result-icon {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, rgba(79,156,255,0.25), rgba(124,92,255,0.25));
+      border: 1px solid rgba(79,156,255,0.35);
+    }
+
+    .result-card h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .result-card p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .final-score {
+      margin: 30px auto;
+      width: min(270px, 100%);
+      padding: 28px;
+      border-radius: 22px;
+      background: #0d1b2d;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .final-score .number {
+      font-size: 3.2rem;
+      font-weight: bold;
+      color: #8bbcff;
+    }
+
+    .final-score span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .performance {
+      margin-bottom: 25px;
+      font-weight: bold;
+      color: #dce9ff;
+    }
+
+    .restart-btn {
+      padding: 15px 30px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      font-size: 0.95rem;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      color: #71839e;
+      font-size: 0.8rem;
+    }
+
+    footer strong {
+      color: #9bbff0;
+    }
+
+    /* ================= ANIMATION ================= */
+
+    @keyframes fadeUp {
       from {
-        filter: drop-shadow(0 0 10px #ff8fbd);
+        opacity: 0;
+        transform: translateY(18px);
       }
-
       to {
-        filter: drop-shadow(0 0 30px #ff4f9a);
-      }
-    }
-
-    @keyframes float {
-      0%, 100% {
+        opacity: 1;
         transform: translateY(0);
       }
-
-      50% {
-        transform: translateY(-15px);
-      }
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 700px) {
+      .header {
+        padding: 14px 4%;
       }
 
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes buttonAppear {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes slideLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
+      .brand-logo {
+        width: 45px;
+        height: 45px;
       }
 
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideRight {
-      from {
-        opacity: 0;
-        transform: translateX(50px);
+      .brand-text h1 {
+        font-size: 0.92rem;
       }
 
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes finalAppear {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
+      .brand-text p {
+        font-size: 0.68rem;
       }
 
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: scale(1);
+      .exam-tag {
+        display: none;
       }
 
-      50% {
-        transform: scale(1.15);
+      .main {
+        padding: 35px 0;
+      }
+
+      .details-card,
+      .question-card {
+        padding: 24px 18px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quiz-top {
+        align-items: flex-start;
+      }
+
+      .score-box {
+        font-size: 0.76rem;
+        padding: 9px 10px;
+      }
+
+      .option {
+        padding: 14px;
+      }
+
+      .question {
+        font-size: 1.22rem;
       }
     }
+  </style></head><body>  <!-- ================= HEADER ================= -->  <header class="header"><div class="brand">
 
-    @keyframes rise {
-      from {
-        transform: translateY(110vh) rotate(0deg);
-      }
+  <div class="brand-logo">
+    <!-- Upload your logo with the exact name: suhail.png -->
+    <img src="suhail.png" alt="Suhail Practice Web Logo">
+  </div>
 
-      to {
-        transform: translateY(-10vh) rotate(360deg);
-      }
-    }
+  <div class="brand-text">
+    <h1>SUHAIL PRACTICE WEB</h1>
+    <p>Learn • Practice • Improve</p>
+  </div>
 
-    @media (max-width: 768px) {
-      .message-container {
-        gap: 30px;
-      }
+</div>
 
-      .message-box {
-        padding: 28px 22px;
-      }
+<div class="exam-tag">
+  COST ACCOUNTING • PRACTICE TEST
+</div>
 
-      .final-card {
-        padding: 40px 22px;
-      }
+  </header>  <!-- ================= MAIN ================= -->  <main class="main"><!-- WELCOME SCREEN -->
 
-      .final-card p {
-        font-size: 1.05rem;
-      }
-    }
+<section class="screen active" id="welcomeScreen">
 
-  </style>
-</head>
+  <div class="hero">
 
-<body>
-
-  <!-- PAGE 1 -->
-  <section class="page active" id="welcomePage">
-
-    <h1 class="birthday-title">Happy Birthday 🎂</h1>
-
-    <div class="birthday-name">
-      Afrin ❤️
+    <div class="hero-badge">
+      30 Important Practice Questions
     </div>
 
-    <button class="click-here" onclick="showMessage()">
-      Click Here ✨
+    <h2>
+      Cost Accounting
+      <span>Practice Test</span>
+    </h2>
+
+    <p>
+      Test your understanding with 30 carefully selected MCQs.
+      After every answer, the correct answer and a short explanation
+      will be shown before moving to the next question.
+    </p>
+
+  </div>
+
+
+  <div class="details-card">
+
+    <div class="section-title">
+      <h3>Student Details</h3>
+      <p>Please fill in your details before starting the practice test.</p>
+    </div>
+
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Full Name</label>
+        <input type="text" id="studentName" placeholder="Enter your full name">
+      </div>
+
+      <div class="field">
+        <label>Roll Number</label>
+        <input type="text" id="rollNo" placeholder="Enter your roll number">
+      </div>
+
+      <div class="field">
+        <label>Semester</label>
+        <select id="semester">
+          <option value="">Select semester</option>
+          <option>1st Semester</option>
+          <option>2nd Semester</option>
+          <option selected>3rd Semester</option>
+          <option>4th Semester</option>
+          <option>5th Semester</option>
+          <option>6th Semester</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Degree / Programme</label>
+        <input type="text" id="degree" placeholder="Example: B.Com (Hons)">
+      </div>
+
+      <div class="field">
+        <label>College / University</label>
+        <input type="text" id="college" placeholder="Example: USTM">
+      </div>
+
+      <div class="field">
+        <label>Subject</label>
+        <input type="text" value="Cost Accounting" readonly>
+      </div>
+
+    </div>
+
+
+    <button class="start-btn" onclick="startQuiz()">
+      Start Practice Test →
     </button>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- PAGE 2 -->
-  <section class="page" id="messagePage">
+<!-- QUIZ SCREEN -->
 
-    <div class="message-container">
+<section class="screen" id="quizScreen">
 
-      <!-- MESSAGE -->
-      <div class="message-box">
+  <div class="quiz-top">
 
-        <h1>Happy Birthday, Afrin 🤍</h1>
+    <div class="candidate">
 
-        <p>
-          Today is your day, and even though things between us are not the
-          same anymore, I still couldn't let this day pass without wishing
-          you something special.
-          <br><br>
-
-          Maybe life took us in different directions, and maybe we are no
-          longer together the way we once were. But some people leave a
-          place in your heart that time and distance cannot simply erase.
-          <br><br>
-
-          You were an important part of my life, and honestly, you will
-          always be someone I remember with a special place in my heart.
-          Not everything is meant to last forever, but that doesn't mean
-          it wasn't real or meaningful.
-          <br><br>
-
-          On your birthday, I genuinely hope life gives you every reason
-          to smile. I hope your dreams come closer, your heart feels
-          peaceful, and the future brings you happiness that stays.
-          <br><br>
-
-          So wherever life takes us from here...
-          <br>
-          I hope you never forget that once, you meant a lot to someone.
-        </p>
-
+      <div class="candidate-avatar" id="candidateInitial">
+        S
       </div>
 
-
-      <!-- PHOTO -->
-      <div class="photo-section">
-
-        <div class="photo-frame">
-
-          <!-- PHOTO MUST BE NAMED: afrin.jpg -->
-          <img src="afrin.jpg" alt="Afrin">
-
-        </div>
-
-        <button class="click-me" onclick="showFinal()">
-          Click Me 🤍
-        </button>
-
+      <div class="candidate-info">
+        <h3 id="displayName">Student</h3>
+        <p id="displayDetails">Cost Accounting Practice Test</p>
       </div>
 
     </div>
 
-  </section>
-
-
-  <!-- PAGE 3 -->
-  <section class="page" id="finalPage">
-
-    <div class="final-card">
-
-      <div class="heart">❤️</div>
-
-      <h1>One Last Thing...</h1>
-
-      <p>
-        Maybe we are not together anymore.
-        Maybe we don't talk the way we once used to.
-        Maybe our story did not end the way either of us imagined.
-        <br><br>
-
-        But somewhere between all the memories, conversations, laughter,
-        arguments, and moments we shared...
-        you became a part of my life that I can never pretend didn't exist.
-        <br><br>
-
-        I don't know what the future holds for either of us.
-        I don't know if our paths will ever cross again.
-        But I truly hope that whenever you look back at this chapter of
-        your life, you remember that someone once cared about you deeply.
-        <br><br>
-
-        Even if we are no longer side by side,
-        I hope life treats you kindly.
-        I hope you smile more than you cry.
-        And I hope every birthday after this one brings you
-        something beautiful.
-        <br><br>
-
-        <strong>
-          Happy Birthday, Afrin. 🤍<br>
-          Maybe we are no longer together, but you'll always have a small
-          place in my heart.
-        </strong>
-
-      </p>
-
-      <div class="signature">
-        — Someone who will always wish the best for you ✨
-      </div>
-
+    <div class="score-box">
+      Score: <span id="liveScore">0</span>/30
     </div>
 
-  </section>
+  </div>
 
 
-  <script>
-
-    function showMessage() {
-
-      document.getElementById("welcomePage").classList.remove("active");
-
-      document.getElementById("messagePage").classList.add("active");
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    }
+  <div class="progress-wrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
 
 
-    function showFinal() {
+  <div class="question-card">
 
-      document.getElementById("messagePage").classList.remove("active");
+    <div class="question-number" id="questionNumber">
+      QUESTION 1 OF 30
+    </div>
 
-      document.getElementById("finalPage").classList.add("active");
+    <div class="question" id="questionText"></div>
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+    <div class="options" id="optionsContainer"></div>
 
-    }
+    <div class="feedback" id="feedback"></div>
+
+    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">
+      Next Question →
+    </button>
+
+  </div>
+
+</section>
 
 
-    /* Create floating background particles */
+<!-- RESULT SCREEN -->
 
-    for (let i = 0; i < 35; i++) {
+<section class="screen" id="resultScreen">
 
-      const particle = document.createElement("div");
+  <div class="result-card">
 
-      particle.classList.add("particle");
+    <div class="result-icon">
+      🏆
+    </div>
 
-      const size = Math.random() * 8 + 4;
+    <h2>Practice Test Completed!</h2>
 
-      particle.style.width = size + "px";
-      particle.style.height = size + "px";
+    <p id="resultName">
+      Great effort!
+    </p>
 
-      particle.style.left = Math.random() * 100 + "vw";
+    <div class="final-score">
+      <div class="number" id="finalScore">0/30</div>
+      <span>Correct Answers</span>
+    </div>
 
-      particle.style.animationDuration =
-        Math.random() * 8 + 6 + "s";
+    <div class="performance" id="performanceText"></div>
 
-      particle.style.animationDelay =
-        Math.random() * 8 + "s";
+    <p>
+      Review the concepts behind the questions you missed and try again.
+      Practice makes concepts stronger.
+    </p>
 
-      particle.style.background =
-        `hsl(${Math.random() * 60 + 300}, 100%, 75%)`;
+    <br>
 
-      document.body.appendChild(particle);
+    <button class="restart-btn" onclick="restartQuiz()">
+      Practice Again ↻
+    </button>
 
-    }
+  </div>
 
-  </script>
+</section>
 
-</body>
-</html>
+  </main>  <footer>
+    Developed for practice • <strong>SUHAIL PRACTICE WEB</strong>
+  </footer>  <script>
+
+    /* ==========================================================
+       30 COST ACCOUNTING MCQs
+       ========================================================== */
+
+    const questions = [
+
+      {
+        question: "What is Cost Accounting primarily concerned with?",
+        options: [
+          "Recording only financial transactions",
+          "Ascertainment and control of cost",
+          "Preparing income tax returns",
+          "Calculating only sales revenue"
+        ],
+        answer: 1,
+        explanation: "Cost Accounting focuses on determining, analysing and controlling the cost of products or services."
+      },
+
+      {
+        question: "Which of the following is NOT an element of cost?",
+        options: [
+          "Material",
+          "Labour",
+          "Expenses",
+          "Sales"
+        ],
+        answer: 3,
+        explanation: "The main elements of cost are material, labour and expenses. Sales is revenue, not an element of cost."
+      },
+
+      {
+        question: "Prime Cost is equal to:",
+        options: [
+          "Direct Material + Direct Labour + Direct Expenses",
+          "Direct Material + Factory Overhead",
+          "Direct Labour + Administrative Overhead",
+          "Fixed Cost + Variable Cost"
+        ],
+        answer: 0,
+        explanation: "Prime Cost consists of all direct costs: direct material, direct labour and direct expenses."
+      },
+
+      {
+        question: "Factory or Works Cost is generally calculated as:",
+        options: [
+          "Prime Cost + Factory Overheads",
+          "Prime Cost + Selling Overheads",
+          "Cost of Production + Administration Overheads",
+          "Variable Cost + Profit"
+        ],
+        answer: 0,
+        explanation: "Works Cost is obtained by adding factory or production overheads to Prime Cost."
+      },
+
+      {
+        question: "Which cost is directly traceable to a specific product or job?",
+        options: [
+          "Indirect Cost",
+          "Direct Cost",
+          "Fixed Overhead",
+          "Period Cost"
+        ],
+        answer: 1,
+        explanation: "A direct cost can be specifically identified and charged to a particular product, job or cost unit."
+      },
+
+      {
+        question: "Indirect Material is generally treated as:",
+        options: [
+          "Direct Expense",
+          "Prime Cost",
+          "Overhead",
+          "Selling Price"
+        ],
+        answer: 2,
+        explanation: "Materials that cannot be conveniently traced to a specific product are treated as indirect material and included in overheads."
+      },
+
+      {
+        question: "Which of the following is an example of Direct Material?",
+        options: [
+          "Lubricating oil used for machines",
+          "Timber used to manufacture furniture",
+          "Office stationery",
+          "Factory supervisor's salary"
+        ],
+        answer: 1,
+        explanation: "Timber can be directly identified with furniture production, so it is a direct material."
+      },
+
+      {
+        question: "Wages paid to workers directly engaged in manufacturing are called:",
+        options: [
+          "Indirect Labour",
+          "Direct Labour",
+          "Selling Overhead",
+          "Administrative Expense"
+        ],
+        answer: 1,
+        explanation: "Wages of workers directly involved in production form Direct Labour."
+      },
+
+      {
+        question: "Idle time means:",
+        options: [
+          "Time spent producing goods",
+          "Time for which wages are paid but no production is obtained",
+          "Overtime worked by employees",
+          "Time spent selling goods"
+        ],
+        answer: 1,
+        explanation: "Idle time is paid time during which employees do not produce output."
+      },
+
+      {
+        question: "Overheads are best described as:",
+        options: [
+          "All direct costs",
+          "Indirect costs of production or operation",
+          "Only material costs",
+          "Only fixed costs"
+        ],
+        answer: 1,
+        explanation: "Overheads are indirect costs that cannot be directly identified with a specific cost unit."
+      },
+
+      {
+        question: "Rent of a factory building is usually classified as:",
+        options: [
+          "Direct Material",
+          "Direct Labour",
+          "Factory Overhead",
+          "Selling Overhead"
+        ],
+        answer: 2,
+        explanation: "Factory rent is an indirec
