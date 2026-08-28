@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUHAIL PRACTICE WEB | Cost Accounting</title>
+
+<style>
+:root{
+  --bg:#061225;
+  --bg2:#0b2144;
+  --card:rgba(13,31,62,.82);
+  --line:rgba(255,255,255,.12);
+  --text:#f7f9ff;
+  --muted:#aebbd2;
+  --blue:#3b82f6;
+  --purple:#8b5cf6;
+  --green:#22c55e;
+  --red:#ef4444;
+  --gold:#fbbf24;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 8% 8%,rgba(46,103,208,.32),transparent 28%),
+    radial-gradient(circle at 92% 10%,rgba(126,62,204,.28),transparent 27%),
+    linear-gradient(135deg,var(--bg),var(--bg2));
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.14;
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+.app{
+  position:relative;
+  width:min(1100px,94%);
+  margin:auto;
+  padding:25px 0 45px;
+}
+
+.screen{
+  display:none;
+  animation:enter .4s ease;
+}
+
+.screen.active{
+  display:block;
+}
+
+@keyframes enter{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.brand{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.logo{
+  width:78px;
+  height:78px;
+  margin:auto;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  font-weight:900;
+  letter-spacing:2px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  border:3px solid rgba(255,255,255,.18);
+  box-shadow:0 0 45px rgba(87,99,255,.42);
+}
+
+h1{
+  font-size:clamp(30px,5vw,52px);
+  margin:17px 0 8px;
+}
+
+.subtitle{
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:#91b9ff;
+}
+
+.glass{
+  background:linear-gradient(
+    145deg,
+    rgba(20,49,94,.78),
+    rgba(8,21,47,.88)
+  );
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:0 25px 80px rgba(0,0,0,.42);
+  backdrop-filter:blur(18px);
+}
+
+.welcome{
+  max-width:800px;
+  margin:auto;
+  padding:32px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+label{
+  font-size:13px;
+  font-weight:700;
+  color:#cad6ec;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:rgba(3,12,30,.55);
+  color:white;
+  outline:none;
+  font-size:15px;
+}
+
+input:focus{
+  border-color:#4f8cff;
+  box-shadow:0 0 0 4px rgba(59,130,246,.12);
+}
+
+.info{
+  margin:22px 0;
+  padding:19px;
+  border-radius:18px;
+  background:rgba(59,130,246,.08);
+  border:1px solid rgba(90,145,255,.2);
+}
+
+.info h3{
+  margin:0 0 10px;
+}
+
+.info p{
+  margin:6px 0;
+  color:var(--muted);
+}
+
+.btn{
+  border:0;
+  border-radius:15px;
+  padding:16px 22px;
+  cursor:pointer;
+  color:#fff;
+  font-size:15px;
+  font-weight:900;
+  background:linear-gradient(135deg,var(--blue),var(--purple));
+  box-shadow:0 10px 30px rgba(69,87,255,.27);
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+}
+
+.btn:active{
+  transform:scale(.98);
+}
+
+.btn.full{
+  width:100%;
+}
+
+.btn.secondary{
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--line);
+  box-shadow:none;
+}
+
+.btn.green{
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+}
+
+.error{
+  min-height:20px;
+  color:#ff9ba6;
+  text-align:center;
+  margin-top:10px;
+  font-size:13px;
+}
+
+.levels{
+  max-width:950px;
+  margin:auto;
+  padding:30px;
+}
+
+.level-title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.level-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+}
+
+.level-card{
+  padding:22px 15px;
+  text-align:center;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.05);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.level-card:hover:not(.locked){
+  transform:translateY(-4px);
+  border-color:#6298ff;
+}
+
+.level-card.locked{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+.level-card.completed{
+  border-color:rgba(34,197,94,.6);
+  background:rgba(34,197,94,.08);
+}
+
+.level-number{
+  font-size:24px;
+  font-weight:900;
+}
+
+.level-status{
+  margin-top:9px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.quiz{
+  max-width:920px;
+  margin:auto;
+  padding:25px;
+}
+
+.topline{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:800;
+}
+
+.pills{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:15px 0;
+}
+
+.pill{
+  padding:8px 12px;
+  border-radius:99px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--line);
+  font-size:12px;
+}
+
+.progress{
+  height:10px;
+  background:rgba(255,255,255,.08);
+  border-radius:30px;
+  overflow:hidden;
+  margin:17px 0 28px;
+}
+
+.bar{
+  height:100%;
+  width:0;
+  border-radius:30px;
+  transition:width .4s ease;
+  background:linear-gradient(90deg,var(--blue),var(--purple),#c084fc);
+}
+
+.question{
+  font-size:clamp(21px,3vw,30px);
+  line-height:1.45;
+  margin:0 0 24px;
+}
+
+.options{
+  display:grid;
+  gap:12px;
+}
+
+.option{
+  width:100%;
+  text-align:left;
+  padding:17px;
+  border-radius:17px;
+  color:#fff;
+  font-size:15px;
+  background:rgba(255,255,255,.045);
+  border:1px solid var(--line);
+  cursor:pointer;
+  transition:.2s;
+}
+
+.option:hover:not(:disabled){
+  transform:translateX(3px);
+  border-color:#528bff;
+  background:rgba(59,130,246,.1);
+}
+
+.option:disabled{
+  cursor:not-allowed;
+}
+
+.option.correct{
+  background:rgba(34,197,94,.17);
+  border-color:var(--green);
+}
+
+.option.wrong{
+  background:rgba(239,68,68,.16);
+  border-color:var(--red);
+}
+
+.feedback{
+  display:none;
+  margin-top:22px;
+  padding:20px;
+  border-radius:18px;
+  background:rgba(255,255,255,.055);
+  border:1px solid var(--line);
+}
+
+.feedback.show{
+  display:block;
+}
+
+.status{
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:9px;
+}
+
+.correctline{
+  margin-bottom:10px;
+  color:#dce6f6;
+}
+
+.explanation{
+  white-space:pre-line;
+  line-height:1.7;
+  color:#d4deef;
+}
+
+.nextwrap{
+  display:none;
+  margin-top:20px;
+  text-align:right;
+}
+
+.nextwrap.show{
+  display:block;
+}
+
+.center{
+  max-width:780px;
+  margin:7vh auto;
+  text-align:center;
+  padding:40px;
+}
+
+.badge{
+  display:inline-block;
+  padding:9px 17px;
+  border-radius:99px;
+  background:rgba(139,92,246,.14);
+  border:1px solid rgba(139,92,246,.32);
+  color:#d3c3ff;
+}
+
+.bigscore{
+  font-size:clamp(55px,10vw,90px);
+  font-weight:900;
+  margin:15px 0;
+  background:linear-gradient(135deg,#fff,#83b7ff,#c8a8ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.small{
+  color:var(--muted);
+  line-height:1.7;
+}
+
+.pass{
+  color:#7fffa6;
+  font-size:24px;
+  font-weight:900;
+}
+
+.fail{
+  color:#ff9ba6;
+  font-size:24px;
+  font-weight:900;
+}
+
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+
+.actions .btn{
+  min-width:200px;
+}
+
+.final-box{
+  margin:25px 0;
+  padding:24px;
+  border-radius:22px;
+  background:linear-gradient(
+    135deg,
+    rgba(251,191,36,.15),
+    rgba(139,92,246,.18)
+  );
+  border:1px solid rgba(251,191,36,.28);
+}
+
+.final-score{
+  font-size:50px;
+  font-weight:900;
+}
+
+@media(max-width:700px){
+  .grid,
+  .level-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .welcome,
+  .quiz,
+  .levels,
+  .center{
+    padding:21px;
+  }
+
+  .level-card{
+    padding:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- WELCOME -->
+
+<section id="welcomeScreen" class="screen active">
+
+  <div class="brand">
+    <div class="logo">SPW</div>
+    <h1>SUHAIL PRACTICE WEB</h1>
+    <div class="subtitle">COST ACCOUNTING PRACTICE TEST</div>
+  </div>
+
+  <div class="welcome glass">
+
+    <div class="grid">
+
+      <div class="field">
+        <label>Student Name</label>
+        <input id="studentName" placeholder="Enter your full name">
+      </div>
+
+      <div class="field">
+        <label>Roll Number</label>
+        <input id="rollNumber" placeholder="Enter roll number">
+      </div>
+
+      <div class="field">
+        <label>Semester</label>
+        <input id="semester" placeholder="Example: 1st Semester">
+      </div>
+
+      <div class="field">
+        <label>Degree / Course</label>
+        <input id="course" placeholder="Enter degree or course">
+      </div>
+
+      <div class="field full">
+        <label>College Name</label>
+        <input id="college" placeholder="Enter college name">
+      </div>
+
+    </div>
+
+    <div class="info">
+      <h3>Practice System</h3>
+      <p>• 100 Important Unique Questions</p>
+      <p>• 5 Levels</p>
+      <p>• 20 Questions Per Level</p>
+      <p>• Minimum 15/20 Required To Pass</p>
+      <p>• Final Revision: 30 Random Questions</p>
+    </div>
+
+    <button class="btn full" id="startButton">
+      START PRACTICE
+    </button>
+
+    <div id="welcomeError" class="error"></div>
+
+  </div>
+
+</section>
+
+
+<!-- LEVEL SELECTION -->
+
+<section id="levelScreen" class="screen">
+
+  <div class="brand">
+    <div class="logo">SPW</div>
+    <h1>SELECT YOUR LEVEL</h1>
+    <div class="subtitle">PASS EACH LEVEL TO UNLOCK THE NEXT ONE</div>
+  </div>
+
+  <div class="levels glass">
+
+    <div class="level-title">
+      <p class="small">
+        Student: <b id="levelStudentName"></b>
+      </p>
+    </div>
+
+    <div class="level-grid" id="levelGrid"></div>
+
+    <div class="actions">
+      <button class="btn secondary" id="editButton">
+        EDIT STUDENT DETAILS
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section id="quizScreen" class="screen">
+
+  <div class="brand">
+    <div class="logo">SPW</div>
+    <div class="subtitle">COST ACCOUNTING PRACTICE TEST</div>
+  </div>
+
+  <div class="quiz glass">
+
+    <div class="topline">
+      <span id="levelText"></span>
+      <span id="questionText"></span>
+      <span id="scoreText"></span>
+    </div>
+
+    <div class="progress">
+      <div class="bar" id="progressBar"></div>
+    </div>
+
+    <h2 class="question" id="question"></h2>
+
+    <div class="options" id="options"></div>
+
+    <div class="feedback" id="feedback">
+
+      <div class="status" id="status"></div>
+
+      <div class="correctline" id="correctLine"></div>
+
+      <div class="explanation" id="explanation"></div>
+
+    </div>
+
+    <div class="nextwrap" id="nextWrap">
+
+      <button class="btn" id="nextButton">
+        NEXT QUESTION →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LEVEL RESULT -->
+
+<section id="levelResultScreen" class="screen">
+
+  <div class="center glass">
+
+    <div class="badge" id="resultLevelBadge"></div>
+
+    <h1 id="resultTitle"></h1>
+
+    <div class="bigscore" id="resultScore"></div>
+
+    <p class="small" id="resultMessage"></p>
+
+    <div class="actions">
+
+      <button class="btn" id="resultMainButton"></button>
+
+      <button class="btn secondary" id="backToLevelsButton">
+        BACK TO LEVELS
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- REVISION INTRO -->
+
+<section id="revisionScreen" class="screen">
+
+  <div class="center glass">
+
+    <div class="logo">SPW</div>
+
+    <h1>AB TAK KYA SIKHA?<br>CHALO DEKHTE HAI 🔥</h1>
+
+    <p class="small">
+      You have completed all 5 levels successfully.
+      Now it is time for the Final Revision Challenge.
+    </p>
+
+    <div class="info">
+      <h3>FINAL REVISION</h3>
+      <p>• 30 Random Questions</p>
+      <p>• Selected from your completed practice questions</p>
+      <p>• No pass mark pressure — just show what you learned!</p>
+    </div>
+
+    <button class="btn green" id="readyButton">
+      READY →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- FINAL RESULT -->
+
+<section id="finalScreen" class="screen">
+
+  <div class="center glass">
+
+    <div class="logo">SPW</div>
+
+    <h1>CONGRATULATIONS! 🏆</h1>
+
+    <p class="small" id="finalStudent"></p>
+
+    <div class="final-box">
+
+      <div class="subtitle">FINAL REVISION SCORE</div>
+
+      <div class="final-score" id="finalRevisionScore"></div>
+
+      <p class="small" id="finalMessage"></p>
+
+    </div>
+
+    <div class="actions">
+
+      <button class="btn" id="practiceAgainButton">
+        PRACTICE AGAIN 🔄
+      </button>
+
+      <button class="btn secondary" id="finalEditButton">
+        EDIT STUDENT DETAILS
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   QUESTION BANK
+   Exactly 100 unique Cost Accounting MCQs
+   ========================================================= */
+
+const BASE_QUESTIONS = [
+
+{
+q:"The primary objective of Cost Accounting is to:",
+o:["Ascertain and control cost","Prepare only tax returns","Calculate only profit","Replace management"],
+a:0,
+e:"Cost Accounting mainly helps ascertain, analyse and control costs."
+},
+
+{
+q:"A cost unit is:",
+o:["A place where costs are collected","A unit of product or service for which cost is measured","A method of stock valuation","A type of overhead"],
+a:1,
+e:"A cost unit is the unit in relation to which cost is ascertained, such as per tonne or per unit."
+},
+
+{
+q:"A cost centre is:",
+o:["A location, person or item for which costs are accumulated","A finished product","A selling price","A stock valuation method"],
+a:0,
+e:"A cost centre is a department, machine, person or location for which costs are collected."
+},
+
+{
+q:"Which is an advantage of Cost Accounting?",
+o:["Helps management control cost","Guarantees profit","Eliminates all expenses","Removes the need for management"],
+a:0,
+e:"Cost information helps management identify inefficient expenditure and improve control."
+},
+
+{
+q:"A limitation of Cost Accounting is:",
+o:["It may be costly to install","It needs no records","It always predicts the future exactly","It eliminates judgement"],
+a:0,
+e:"A costing system can require trained staff, detailed records and additional expense."
+},
+
+{
+q:"Direct material is material that:",
+o:["Cannot be traced to a product","Can be conveniently traced to a product","Is always wasted","Is always fixed"],
+a:1,
+e:"Direct material can be directly identified with a specific product or job."
+},
+
+{
+q:"Direct labour means labour:",
+o:["Used directly in production","Used only in administration","Paid monthly","Always indirect"],
+a:0,
+e:"Direct labour is directly involved in manufacturing or producing the output."
+},
+
+{
+q:"Indirect costs are commonly called:",
+o:["Prime costs","Overheads","Direct expenses","Conversion costs only"],
+a:1,
+e:"Indirect material, labour and expenses together are called overheads."
+},
+
+{
+q:"Prime Cost consists of:",
+o:["Direct Material + Direct Labour + Direct Expenses","Direct Material + Factory Overhead","Works Cost + Administration Overhead","Cost of Production + Selling Cost"],
+a:0,
+e:"Prime Cost contains all direct elements of cost."
+},
+
+{
+q:"Works Cost is generally:",
+o:["Prime Cost + Factory Overhead","Prime Cost + Selling Overhead","Production Cost + Distribution Overhead","Material Cost only"],
+a:0,
+e:"Factory or Works Cost is Prime Cost plus Factory Overhead."
+},
+
+{
+q:"Cost of Production is generally:",
+o:["Works Cost + Administration Overhead","Prime Cost + Selling Overhead","Cost of Sales - Profit","Direct Labour + Distribution Overhead"],
+a:0,
+e:"Administration overhead related to production is added to Works Cost."
+},
+
+{
+q:"Cost of Sales is generally:",
+o:["Cost of Production + Selling and Distribution Overheads","Prime Cost only","Works Cost only","Profit + Sales"],
+a:0,
+e:"Selling and distribution overheads are added to Cost of Production."
+},
+
+{
+q:"Which is a factory overhead?",
+o:["Factory supervisor salary","Advertisement","Sales commission","Office director salary"],
+a:0,
+e:"Factory supervision supports production and is therefore factory overhead."
+},
+
+{
+q:"Which is an administration overhead?",
+o:["Office rent","Machine power","Sales commission","Delivery van fuel"],
+a:0,
+e:"Office rent is related to administration."
+},
+
+{
+q:"Which is a selling overhead?",
+o:["Salesmen salary","Factory lighting","Machine repair","Storekeeper salary"],
+a:0,
+e:"Salesmen salary is incurred to obtain and promote sales."
+},
+
+{
+q:"Which is a distribution overhead?",
+o:["Finished goods delivery expense","Direct wages","Factory power","Purchase cost of material"],
+a:0,
+e:"Distribution overhead relates to storage, handling and delivery of finished goods."
+},
+
+{
+q:"A fixed cost:",
+o:["Changes directly with output","Remains constant in total within a relevant range","Is always zero at low output","Is always controllable"],
+a:1,
+e:"Total fixed cost generally remains constant within the relevant range."
+},
+
+{
+q:"A variable cost:",
+o:["Changes in total with activity","Never changes","Is always fixed","Is unrelated to output"],
+a:0,
+e:"Variable cost generally changes in total as activity changes."
+},
+
+{
+q:"A semi-variable cost contains:",
+o:["Only fixed cost","Only variable cost","Both fixed and variable elements","No cost elements"],
+a:2,
+e:"Semi-variable cost has both fixed and variable components."
+},
+
+{
+q:"The main purpose of material control is to:",
+o:["Ensure supply at reasonable cost","Keep unlimited stock","Avoid documentation","Eliminate purchasing"],
+a:0,
+e:"Material control aims to maintain adequate materials economically."
+},
+
+{
+q:"EOQ means:",
+o:["Economic Order Quantity","Estimated Output Quantity","Equal Order Quality","Extraordinary Order Quantity"],
+a:0,
+e:"EOQ is Economic Order Quantity."
+},
+
+{
+q:"EOQ is the order quantity that generally minimizes:",
+o:["Ordering and carrying costs","Selling cost only","Direct labour","Administration overhead"],
+a:0,
+e:"EOQ balances ordering cost and carrying cost."
+},
+
+{
+q:"Re-order level indicates:",
+o:["Point at which a fresh order should be placed","Maximum stock value","Selling price","Finished goods level"],
+a:0,
+e:"A new purchase order is normally placed when stock reaches the re-order level."
+},
+
+{
+q:"Minimum stock level is maintained to:",
+o:["Avoid stock becoming too low","Maximize stock","Determine selling price","Replace stock records"],
+a:0,
+e:"It helps prevent stock-out."
+},
+
+{
+q:"Maximum stock level helps prevent:",
+o:["Overstocking","Stock recording","Material issue","Labour turnover"],
+a:0,
+e:"Maximum level prevents unnecessary investment and storage costs."
+},
+
+{
+q:"Safety stock is:",
+o:["Extra stock held against uncertainty","Damaged stock","Sold stock","Free stock"],
+a:0,
+e:"Safety stock acts as a buffer against unexpected demand or delays."
+},
+
+{
+q:"Danger level indicates:",
+o:["Critically low stock requiring urgent action","Maximum stock","Average stock","Profit level"],
+a:0,
+e:"Danger level warns that stock has fallen to a critical point."
+},
+
+{
+q:"Perpetual inventory system means:",
+o:["Continuous recording of inventory movements","Counting stock once in many years","Using only FIFO","Buying continuously"],
+a:0,
+e:"Stock receipts, issues and balances are continuously recorded."
+},
+
+{
+q:"A Bin Card is usually maintained by:",
+o:["Storekeeper","Sales manager","Customer","Auditor"],
+a:0,
+e:"The storekeeper generally maintains the Bin Card."
+},
+
+{
+q:"A Stores Ledger is generally maintained by:",
+o:["Costing or accounts department","Customer","Sales department","Production worker"],
+a:0,
+e:"Stores Ledger records both quantity and value and is generally maintained by costing/accounts."
+},
+
+{
+q:"FIFO means:",
+o:["First In First Out","Final In Final Out","First Issue Final Output","Fixed Inventory Flow Order"],
+a:0,
+e:"FIFO assumes the earliest inventory is issued first."
+},
+
+{
+q:"LIFO means:",
+o:["Last In First Out","Lowest Issue First Out","Labour In Factory Output","Last Issue Final Output"],
+a:0,
+e:"LIFO assumes the latest inventory is issued first."
+},
+
+{
+q:"Weighted Average Method uses:",
+o:["Weighted average inventory cost","Only oldest price","Only latest price","Selling price"],
+a:0,
+e:"Issue price is calculated from total cost divided by total quantity."
+},
+
+{
+q:"Material Requisition Note authorizes:",
+o:["I
